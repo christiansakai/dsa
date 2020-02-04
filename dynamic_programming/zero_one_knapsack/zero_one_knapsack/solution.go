@@ -9,7 +9,7 @@ type Fruit struct {
 }
 
 func TopDown(fruits []Fruit, capacity int) int {
-  if len(fruits) == 0 {
+  if len(fruits) == 0 || capacity == 0 {
     return 0
   }
 
@@ -61,7 +61,7 @@ func recurse(fruits []Fruit, index, capacity int, cache map[int]map[int]int) int
 }
 
 func BottomUp(fruits []Fruit, capacity int) int {
-  if len(fruits) == 0 {
+  if len(fruits) == 0 || capacity == 0 {
     return 0
   }
 
@@ -82,7 +82,7 @@ func BottomUp(fruits []Fruit, capacity int) int {
     }
   }
 
-  // Process the rest of sub-arrays for the rest of the capacities
+  // Process the rest of fruits for the rest of the capacities
   for i := 1; i < len(fruits); i++ {
     for c := 1; c <= capacity; c++ {
       var max float64 = 0
@@ -103,7 +103,7 @@ func BottomUp(fruits []Fruit, capacity int) int {
 }
 
 func BottomUpMinSpace(fruits []Fruit, capacity int) int {
-  if len(fruits) == 0 {
+  if len(fruits) == 0 || capacity == 0 {
     return 0
   }
 
