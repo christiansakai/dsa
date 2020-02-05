@@ -20,13 +20,4 @@ func TestSolution(t *testing.T) {
 			}
 		}
 	})
-
-	// t.Run("Bottom-up Dynamic Programming", func(t *testing.T) {
-	//   for _, tt := range tests {
-	//     got := SolveBottomUp(tt.Input)
-	//     if got != tt.Output {
-	//       t.Errorf("got %d, want %d", got, want)
-	//     }
-	//   }
-	// })
 }

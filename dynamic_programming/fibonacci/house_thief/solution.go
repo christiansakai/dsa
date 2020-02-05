@@ -21,10 +21,16 @@ func recurse(houses []int, index int, cache map[int]int) int {
 		return houses[1]
 	}
 
+	if result, ok := cache[index]; ok {
+		return result
+	}
+
 	with := houses[index] + recurse(houses, index-2, cache)
 	without := recurse(houses, index-1, cache)
 
 	result := int(math.Max(float64(with), float64(without)))
+
+	cache[index] = result
 
 	return result
 }
