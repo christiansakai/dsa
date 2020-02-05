@@ -12,9 +12,9 @@ func TopDown(cuttings []Cutting, length int) int {
 		return 0
 	}
 
-  cache := map[int]map[int]int{}
+	cache := map[int]map[int]int{}
 
-	return recurse(cuttings, length, len(cuttings) - 1, cache)
+	return recurse(cuttings, length, len(cuttings)-1, cache)
 }
 
 func recurse(cuttings []Cutting, length, index int, cache map[int]map[int]int) int {
@@ -22,29 +22,29 @@ func recurse(cuttings []Cutting, length, index int, cache map[int]map[int]int) i
 		return 0
 	}
 
-  if _, ok := cache[length]; ok {
-    if result, ok := cache[length][index]; ok {
-      return result
-    }
-  }
+	if _, ok := cache[length]; ok {
+		if result, ok := cache[length][index]; ok {
+			return result
+		}
+	}
 
 	var max float64 = 0
 
-  if cuttings[index].Length <= length {
-    with := cuttings[index].Price + recurse(cuttings, length - cuttings[index].Length, index, cache)
-    max = math.Max(max, float64(with))
-  }
+	if cuttings[index].Length <= length {
+		with := cuttings[index].Price + recurse(cuttings, length-cuttings[index].Length, index, cache)
+		max = math.Max(max, float64(with))
+	}
 
-  without := recurse(cuttings, length, index - 1, cache)
-  max = math.Max(max, float64(without))
+	without := recurse(cuttings, length, index-1, cache)
+	max = math.Max(max, float64(without))
 
 	result := int(max)
 
-  if _, ok := cache[length]; !ok {
-    cache[length] = map[int]int{}
-  }
+	if _, ok := cache[length]; !ok {
+		cache[length] = map[int]int{}
+	}
 
-  cache[length][index] = result
+	cache[length][index] = result
 
 	return result
 }

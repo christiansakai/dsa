@@ -10,42 +10,42 @@ type Fruit struct {
 
 func TopDown(fruits []Fruit, capacity int) int {
 	if len(fruits) == 0 || capacity == 0 {
-	  return 0
+		return 0
 	}
 
 	cache := map[int]map[int]int{}
 
-	return recurse(fruits, capacity, len(fruits) - 1, cache)
+	return recurse(fruits, capacity, len(fruits)-1, cache)
 }
 
 func recurse(fruits []Fruit, capacity, index int, cache map[int]map[int]int) int {
 	if capacity == 0 || index == -1 {
-	  return 0
+		return 0
 	}
 
-  if _, ok := cache[capacity]; ok {
-    if result, ok := cache[capacity][index]; ok {
-      return result
-    }
-  }
+	if _, ok := cache[capacity]; ok {
+		if result, ok := cache[capacity][index]; ok {
+			return result
+		}
+	}
 
-  var max float64
+	var max float64
 
-  if fruits[index].Weight <= capacity {
-    with := fruits[index].Profit + recurse(fruits, capacity - fruits[index].Weight, index, cache)
-    max = math.Max(max, float64(with))
-  }
+	if fruits[index].Weight <= capacity {
+		with := fruits[index].Profit + recurse(fruits, capacity-fruits[index].Weight, index, cache)
+		max = math.Max(max, float64(with))
+	}
 
-  without := recurse(fruits, capacity, index - 1, cache)
-  max = math.Max(max, float64(without))
+	without := recurse(fruits, capacity, index-1, cache)
+	max = math.Max(max, float64(without))
 
-  result := int(max)
+	result := int(max)
 
-  if _, ok := cache[capacity]; !ok {
-    cache[capacity] = map[int]int{}
-  }
+	if _, ok := cache[capacity]; !ok {
+		cache[capacity] = map[int]int{}
+	}
 
-  cache[capacity][index] = result
+	cache[capacity][index] = result
 
-  return result
+	return result
 }

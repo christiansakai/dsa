@@ -2,12 +2,11 @@ package solution
 
 func TopDown(n int) int {
 	cache := map[int]int{}
-
 	return recurse(n, cache)
 }
 
 func recurse(n int, cache map[int]int) int {
-	if n == 0 {
+	if n <= 0 {
 		return 0
 	}
 
@@ -15,13 +14,15 @@ func recurse(n int, cache map[int]int) int {
 		return 1
 	}
 
-	if result, ok := cache[n]; ok {
-		return result
+	if n == 3 {
+		return 2
 	}
 
-	result := recurse(n-1, cache) + recurse(n-2, cache)
+	if n == 4 {
+		return 4
+	}
 
-	cache[n] = result
+	result := recurse(n-1, cache) + recurse(n-3, cache) + recurse(n-4, cache)
 
 	return result
 }
