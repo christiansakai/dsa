@@ -1,3 +1,7 @@
 # Data Structures and Algorithms
 
-In Go
+What needs to be done:
+- Dynamic Programming
+  - Bottom up
+  - Bottom up with minimum space
+  - Find the choices
