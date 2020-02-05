@@ -12,54 +12,39 @@ func TopDown(cuttings []Cutting, length int) int {
 		return 0
 	}
 
-	cache := map[int]int{}
+  cache := map[int]map[int]int{}
 
-	return recurse(cuttings, length, cache)
+	return recurse(cuttings, length, len(cuttings) - 1, cache)
 }
 
-func recurse(cuttings []Cutting, length int, cache map[int]int) int {
-	if length == 0 {
+func recurse(cuttings []Cutting, length, index int, cache map[int]map[int]int) int {
+	if length == 0 || index == -1 {
 		return 0
 	}
 
-	if result, ok := cache[length]; ok {
-		return result
-	}
+  if _, ok := cache[length]; ok {
+    if result, ok := cache[length][index]; ok {
+      return result
+    }
+  }
 
 	var max float64 = 0
-	for _, c := range cuttings {
-		if c.Length <= length {
-			selection := c.Price + recurse(cuttings, length-c.Length, cache)
-			max = math.Max(max, float64(selection))
-		}
-	}
+
+  if cuttings[index].Length <= length {
+    with := cuttings[index].Price + recurse(cuttings, length - cuttings[index].Length, index, cache)
+    max = math.Max(max, float64(with))
+  }
+
+  without := recurse(cuttings, length, index - 1, cache)
+  max = math.Max(max, float64(without))
 
 	result := int(max)
 
-	cache[length] = result
+  if _, ok := cache[length]; !ok {
+    cache[length] = map[int]int{}
+  }
+
+  cache[length][index] = result
 
 	return result
-}
-
-func BottomUp(cuttings []Cutting, length int) int {
-	if length == 0 {
-		return 0
-	}
-
-	profits := make([]int, length+1)
-	profits[0] = 0
-
-	for l := 1; l <= length; l++ {
-		var max float64 = 0
-		for _, c := range cuttings {
-			if c.Length <= l {
-				selection := c.Price + profits[l-c.Length]
-				max = math.Max(max, float64(selection))
-			}
-		}
-
-		profits[l] = int(max)
-	}
-
-	return profits[length]
 }
