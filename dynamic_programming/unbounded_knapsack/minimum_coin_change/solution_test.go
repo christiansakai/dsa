@@ -41,18 +41,4 @@ func TestSolution(t *testing.T) {
 			}
 		}
 	})
-
-	t.Run("Bottom-up Dynamic Programming", func(t *testing.T) {
-		for _, tt := range tests {
-			got := BottomUp(tt.Input.Coins, tt.Input.Total)
-
-			if got != tt.Output {
-				t.Errorf("got %d, want %d", got, tt.Output)
-			}
-		}
-	})
-}
-
-func TestFindCoins(t *testing.T) {
-	t.Skip()
 }
