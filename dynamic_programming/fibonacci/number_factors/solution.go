@@ -22,13 +22,13 @@ func recurse(n int, cache map[int]int) int {
 		return 4
 	}
 
-  if result, ok := cache[n]; ok {
-    return result
-  }
+	if result, ok := cache[n]; ok {
+		return result
+	}
 
 	result := recurse(n-1, cache) + recurse(n-3, cache) + recurse(n-4, cache)
 
-  cache[n] = result
+	cache[n] = result
 
 	return result
 }
