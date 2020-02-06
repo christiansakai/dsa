@@ -8,8 +8,8 @@ func TestSolution(t *testing.T) {
 		Output int
 	}{
 		{"abdbca", 3},
-		// {"cddpd", 3},
-		// {"pqr", 1},
+		{"cddpd", 3},
+		{"pqr", 1},
 	}
 
 	t.Run("Top-down Dynamic Programming with Memoization", func(t *testing.T) {
