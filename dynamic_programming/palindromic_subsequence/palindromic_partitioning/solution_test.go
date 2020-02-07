@@ -7,13 +7,13 @@ func TestSolution(t *testing.T) {
 		Input  string
 		Output int
 	}{
-		{"abdbca", 7},
-		{"cddpd", 7},
-		{"pqr", 3},
+		{"abdbca", 3},
+		{"cddpd", 2},
+		{"pqr", 2},
+		{"pp", 0},
 	}
 
 	t.Run("Top-down Dynamic Programming with Memoization", func(t *testing.T) {
-		t.Skip()
 		for _, tt := range tests {
 			got := TopDown(tt.Input)
 			if got != tt.Output {
