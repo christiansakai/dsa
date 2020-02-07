@@ -7,25 +7,51 @@ func TopDown(cuttings []int, length int) int {
 		return 0
 	}
 
-	return recurse(cuttings, length, len(cuttings)-1)
+	cache := map[int]map[int]int{}
+
+	return recurse(cuttings, length, len(cuttings)-1, cache)
 }
 
-func recurse(cuttings []int, length, index int) int {
-	if length == 0 || index == -1 {
-		return 0
+func recurse(cuttings []int, length, index int, cache map[int]map[int]int) int {
+	if index == -1 {
+		if length == 0 {
+			return 0
+		}
+
+		// Signify that the length is not exhausted
+		return -1
 	}
 
-	var max float64 = 0
+	if _, ok := cache[length]; ok {
+		if result, ok := cache[length][index]; ok {
+			return result
+		}
+	}
+
+	// Bubble to the top that the length is not exhausted
+	var max float64 = -1
 
 	if cuttings[index] <= length {
-		with := 1 + recurse(cuttings, length-cuttings[index], index)
-		max = math.Max(max, float64(with))
+		thisCutting := recurse(cuttings, length-cuttings[index], index, cache)
+
+		if thisCutting != -1 {
+			thisCutting += 1
+			max = math.Max(max, float64(thisCutting))
+		}
 	}
 
-	without := recurse(cuttings, length, index-1)
-	max = math.Max(max, float64(without))
+	nextCutting := recurse(cuttings, length, index-1, cache)
+	if nextCutting != -1 {
+		max = math.Max(max, float64(nextCutting))
+	}
 
 	result := int(max)
+
+	if _, ok := cache[length]; !ok {
+		cache[length] = map[int]int{}
+	}
+
+	cache[length][index] = result
 
 	return result
 }

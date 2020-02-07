@@ -40,16 +40,6 @@ func TestSolution(t *testing.T) {
 			},
 			Output: 3,
 		},
-		{
-			Input: struct {
-				Cuttings []int
-				Length   int
-			}{
-				Cuttings: []int{2, 3, 5},
-				Length:   9,
-			},
-			Output: 3,
-		},
 	}
 
 	t.Run("Top-down Dynamic Programming with Memoization", func(t *testing.T) {
