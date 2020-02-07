@@ -13,33 +13,32 @@ func TopDown(coins []int, total int) int {
 }
 
 func recurse(coins []int, total, index int, cache map[int]map[int]int) int {
-	if total == 0 || index == -1 {
-		return 0
+	if index == -1 {
+		if total == 0 {
+			return 0
+		}
+
+		// Signify that the total is not exhausted
+		return int(math.Inf(1))
 	}
 
-	// if _, ok := cache[total]; ok {
-	// if result, ok := cache[total][index]; ok {
-	// 	  return result
-	// }
-	// }
-
+	// Bubble to the top that total is not exhausted
 	var min float64 = math.Inf(1)
-
 	if coins[index] <= total {
-		with := 1 + recurse(coins, total-coins[index], index, cache)
-		min = math.Min(min, float64(with))
+		thisCoin := recurse(coins, total-coins[index], index, cache)
+
+		if thisCoin != int(math.Inf(1)) {
+			thisCoin += 1
+			min = math.Min(min, float64(thisCoin))
+		}
 	}
 
-	without := recurse(coins, total, index-1, cache)
-	min = math.Min(min, float64(without))
+	nextCoin := recurse(coins, total, index-1, cache)
+	if nextCoin != int(math.Inf(1)) {
+		min = math.Min(min, float64(nextCoin))
+	}
 
 	result := int(min)
-
-	// if _, ok := cache[total]; !ok {
-	//   cache[total] = map[int]int{}
-	// }
-
-	// cache[total][index] = result
 
 	return result
 }
