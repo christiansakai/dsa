@@ -1,9 +1,6 @@
 package solution
 
-import (
-	"reflect"
-	"testing"
-)
+import "testing"
 
 func TestSolution(t *testing.T) {
 	tests := []struct {

@@ -7,7 +7,7 @@ func TopDown(str string) int {
 		return 0
 	}
 
-  cache := map[int]map[int]int{}
+	cache := map[int]map[int]int{}
 	byteStr := []byte(str)
 
 	return recurse(byteStr, 0, len(byteStr)-1, cache)
@@ -22,11 +22,11 @@ func recurse(str []byte, start, end int, cache map[int]map[int]int) int {
 		return 1
 	}
 
-  if _, ok := cache[start]; ok {
-    if result, ok := cache[start][end]; ok {
-      return result
-    }
-  }
+	if _, ok := cache[start]; ok {
+		if result, ok := cache[start][end]; ok {
+			return result
+		}
+	}
 
 	var max float64 = 0
 
@@ -43,11 +43,11 @@ func recurse(str []byte, start, end int, cache map[int]map[int]int) int {
 
 	result := int(max)
 
-  if _, ok := cache[start]; !ok {
-    cache[start] = map[int]int{}
-  }
+	if _, ok := cache[start]; !ok {
+		cache[start] = map[int]int{}
+	}
 
-  cache[start][end] = result
+	cache[start][end] = result
 
 	return result
 }
