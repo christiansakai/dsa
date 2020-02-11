@@ -5,15 +5,15 @@ import "testing"
 func TestSolution(t *testing.T) {
 	tests := []struct {
 		Input struct {
-      S1 string
-      S2 string
-    }
+			S1 string
+			S2 string
+		}
 		Output int
 	}{
-    {struct{
-      S1 string
-      S2 string
-    }{"bat", "but"}, 1},
+		{struct {
+			S1 string
+			S2 string
+		}{"bat", "but"}, 1},
 	}
 
 	t.Run("Top-down Dynamic Programming with Memoization", func(t *testing.T) {
