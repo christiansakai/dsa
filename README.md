@@ -5,6 +5,17 @@ What needs to be done:
   - Bottom up
   - Bottom up with minimum space
   - Find the choices
+
+## Pattern List
+
+List of useful patterns
+
+- Sliding Window
+- Binary Search (3 versions)
+- DFS Recursive
+- DFS Iterative
+- BFS Recursive
+- BFS Iterative
  
 ## Tricky List
 

@@ -2,8 +2,6 @@ package solution
 
 import "math"
 
-// import "fmt"
-
 func Solve(arr []int, k int) int {
 	if len(arr) <= k {
 		return sum(arr, 0, k-1)
