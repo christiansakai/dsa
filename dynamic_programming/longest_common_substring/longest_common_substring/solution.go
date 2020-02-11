@@ -1,50 +1,51 @@
 package solution
 
-import "math"
+// import "math"
 
 func TopDown(s1, s2 string) int {
-	if len(s1) == 0 || len(s2) == 0 {
-		return 0
-	}
+  return 0
+	// if len(s1) == 0 || len(s2) == 0 {
+	// 	return 0
+	// }
 
-	return recurse([]byte(s1), []byte(s2), 0, 0)
+	// return recurse([]byte(s1), []byte(s2), 0, 0)
 }
 
-func recurse(s1, s2 []byte, i1, i2 int) int {
-	if i1 >= len(s1) || i2 >= len(s2) {
-		return 0
-	}
+// func recurse(s1, s2 []byte, i1, i2 int) int {
+	// if i1 >= len(s1) || i2 >= len(s2) {
+	// 	return 0
+	// }
 
-	var max float64 = 0
-	if s1[i1] == s2[i2] {
-		// expectedLongestCommonSubstr := int(math.Max(
-		//   float64(len(s1) - (i1 + 1)),
-		//   float64(len(s2) - (i2 + 1)),
-		// ))
+	// var max float64 = 0
+	// if s1[i1] == s2[i2] {
+	// 	// expectedLongestCommonSubstr := int(math.Max(
+	// 	//   float64(len(s1) - (i1 + 1)),
+	// 	//   float64(len(s2) - (i2 + 1)),
+	// 	// ))
 
-		lenSubS1 := len(s1) - (i1 + 1)
-		lenSubS2 := len(s2) - (i2 + 1)
+	// 	lenSubS1 := len(s1) - (i1 + 1)
+	// 	lenSubS2 := len(s2) - (i2 + 1)
 
-		// if lenSubS1 != lenSubS2 {
-		// }
-		longestCommonSubStr := recurse(s1, s2, i1+1, i2+1)
+	// 	// if lenSubS1 != lenSubS2 {
+	// 	// }
+	// 	longestCommonSubStr := recurse(s1, s2, i1+1, i2+1)
 
-		if lenSubS1 == lenSubS2 || expectedLongestCommonSubstr == longestCommonSubStr {
-			longestCommonStr := 1 + longestCommonSubStr
-			max = math.Max(max, float64(longestCommonStr))
-		}
-	}
+	// 	if lenSubS1 == lenSubS2 || expectedLongestCommonSubstr == longestCommonSubStr {
+	// 		longestCommonStr := 1 + longestCommonSubStr
+	// 		max = math.Max(max, float64(longestCommonStr))
+	// 	}
+	// }
 
-	skipS1 := recurse(s1, s2, i1+1, i2)
-	max = math.Max(max, float64(skipS1))
+	// skipS1 := recurse(s1, s2, i1+1, i2)
+	// max = math.Max(max, float64(skipS1))
 
-	skipS2 := recurse(s1, s2, i1, i2+1)
-	max = math.Max(max, float64(skipS2))
+	// skipS2 := recurse(s1, s2, i1, i2+1)
+	// max = math.Max(max, float64(skipS2))
 
-	result := int(max)
+	// result := int(max)
 
-	return result
-}
+	// return result
+// }
 
 // func TopDown(s1, s2 string) int {
 // if s1 == "" || s2 == "" {
