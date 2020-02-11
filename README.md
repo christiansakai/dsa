@@ -14,5 +14,6 @@ List of problems where the solution might not be that obvious.
 - `recursion/with_numbers/gcd`
 - `recursion/with_numbers/convert_to_binary`
 - `recursion/with_arrays/reverse_array`
+- `recursion/with_data_structures/reverse_linked_list`
 - `recursion/with_data_structures/reverse_stack`
 

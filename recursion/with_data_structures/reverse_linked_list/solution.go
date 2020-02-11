@@ -1,15 +1,14 @@
 package solution
 
 func Solve(ll *LinkedList) *LinkedList {
-	return ll
-	// if ll.Length == 0 {
-	// 	return ll
-	// }
+	if ll.Length <= 1 {
+		return ll
+	}
 
 	// reversed := recurse(ll.Head.Next)
 	// ll.Head.Next = reversed
 
-	// return ll
+	return ll
 }
 
 func recurse(node *Node) *Node {
