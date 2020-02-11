@@ -1,13 +1,12 @@
 package solution
 
 import (
-	dll "dsa/data_structures/doubly_linked_list"
 	"reflect"
 	"testing"
 )
 
 func TestSolution(t *testing.T) {
-	l := dll.New()
+	l := New()
 	l.PushTail(4)
 	l.PushTail(3)
 	l.PushTail(11)

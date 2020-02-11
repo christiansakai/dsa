@@ -1,13 +1,12 @@
 package solution
 
 import (
-	"dsa/data_structures/graph"
 	"reflect"
 	"testing"
 )
 
 func TestSolution(t *testing.T) {
-	g := graph.New()
+	g := New()
 	g.AddEdge(0, 1)
 	g.AddEdge(0, 3)
 	g.AddEdge(1, 2)

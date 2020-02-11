@@ -1,19 +1,18 @@
 package solution
 
-import dll "dsa/data_structures/doubly_linked_list"
-
-func Solve(ll *dll.LinkedList) *dll.LinkedList {
-	if ll.Length == 0 {
-		return ll
-	}
-
-	reversed := recurse(ll.Head.Next)
-	ll.Head.Next = reversed
-
+func Solve(ll *LinkedList) *LinkedList {
 	return ll
+	// if ll.Length == 0 {
+	// 	return ll
+	// }
+
+	// reversed := recurse(ll.Head.Next)
+	// ll.Head.Next = reversed
+
+	// return ll
 }
 
-func recurse(node *dll.Node) *dll.Node {
+func recurse(node *Node) *Node {
 	if node.Value == nil { // Encounter dummy tail
 		return node
 	}

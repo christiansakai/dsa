@@ -1,8 +1,6 @@
 package solution
 
-import "dsa/data_structures/graph"
-
-func Solve(g *graph.Graph) []int {
+func Solve(g *Graph) []int {
 	collect := []int{}
 	visited := map[int]bool{}
 
@@ -11,7 +9,7 @@ func Solve(g *graph.Graph) []int {
 	return collect
 }
 
-func recurse(g *graph.Graph, node int, visited map[int]bool, collect *[]int) {
+func recurse(g *Graph, node int, visited map[int]bool, collect *[]int) {
 	if visited[node] {
 		return
 	}
@@ -20,7 +18,6 @@ func recurse(g *graph.Graph, node int, visited map[int]bool, collect *[]int) {
 	visited[node] = true
 
 	for _, neighbor := range g.Dict[node] {
-		neighborInt, _ := neighbor.(int)
-		recurse(g, neighborInt, visited, collect)
+		recurse(g, neighbor, visited, collect)
 	}
 }

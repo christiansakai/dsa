@@ -1,8 +1,6 @@
 package solution
 
-import "dsa/data_structures/graph"
-
-func Solve(g *graph.Graph) []int {
+func Solve(g *Graph) []int {
 	nodes := collectAllNodes(g)
 	result := []int{}
 	visited := map[int]bool{}
@@ -11,22 +9,20 @@ func Solve(g *graph.Graph) []int {
 	return result
 }
 
-func collectAllNodes(g *graph.Graph) map[int]bool {
+func collectAllNodes(g *Graph) map[int]bool {
 	nodes := map[int]bool{}
 	for node, neighbors := range g.Dict {
-		nodeInt := node.(int)
-		nodes[nodeInt] = true
+		nodes[node] = true
 
 		for _, neighbor := range neighbors {
-			neighborInt := neighbor.(int)
-			nodes[neighborInt] = true
+			nodes[neighbor] = true
 		}
 	}
 
 	return nodes
 }
 
-func recurse(g *graph.Graph, nodes map[int]bool, visited map[int]bool, result *[]int) {
+func recurse(g *Graph, nodes map[int]bool, visited map[int]bool, result *[]int) {
 	node := findUnvisitedNodeWithZeroInDegree(g, visited, nodes)
 	if node == -1 {
 		return
@@ -39,13 +35,12 @@ func recurse(g *graph.Graph, nodes map[int]bool, visited map[int]bool, result *[
 	recurse(g, nodes, visited, result)
 }
 
-func findUnvisitedNodeWithZeroInDegree(g *graph.Graph, visited map[int]bool, nodes map[int]bool) int {
+func findUnvisitedNodeWithZeroInDegree(g *Graph, visited map[int]bool, nodes map[int]bool) int {
 	inDegrees := map[int]int{}
 
 	for _, neighbors := range g.Dict {
 		for _, neighbor := range neighbors {
-			neighborInt := neighbor.(int)
-			inDegrees[neighborInt] = 1
+			inDegrees[neighbor] = 1
 		}
 	}
 
@@ -58,6 +53,6 @@ func findUnvisitedNodeWithZeroInDegree(g *graph.Graph, visited map[int]bool, nod
 	return -1
 }
 
-func removeNodeFromOtherInDegrees(g *graph.Graph, node int) {
+func removeNodeFromOtherInDegrees(g *Graph, node int) {
 	delete(g.Dict, node)
 }

@@ -6,16 +6,16 @@ import (
 )
 
 func TestSolution(t *testing.T) {
-	g := New()
-	g.AddEdge(0, 1)
-	g.AddEdge(1, 2)
-	g.AddEdge(1, 3)
-	g.AddEdge(2, 4)
-	g.AddEdge(3, 4)
-	g.AddEdge(3, 5)
+	s := New()
+	s.Push(2)
+	s.Push(3)
+	s.Push(5)
+	s.Push(8)
 
-	got := Solve(g)
-	want := []int{0, 1, 2, 4, 3, 5}
+	s = Solve(s)
+
+	got := s.ToSlice()
+	want := []int{8, 5, 3, 2}
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got %v, want %v", got, want)
