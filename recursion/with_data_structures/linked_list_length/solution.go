@@ -1,14 +1,9 @@
 package solution
 
-func Solve(ll *LinkedList) int {
-	result := recurse(ll.Head)
-	return result - 1 // Adjustment for tail
-}
-
-func recurse(node *Node) int {
-	if node == nil {
+func Solve(head *Node) int {
+	if head == nil {
 		return 0
 	}
 
-	return 1 + recurse(node.Next)
+	return 1 + Solve(head.Next)
 }

@@ -1,24 +1,26 @@
 package solution
 
-func Solve(ll *LinkedList) *LinkedList {
-	if ll.Length <= 1 {
-		return ll
+func Solve(head *Node) *Node {
+	if head == nil || head.Next == nil {
+		return head
 	}
 
-	// reversed := recurse(ll.Head.Next)
-	// ll.Head.Next = reversed
+	newHead := Solve(head.Next)
 
-	return ll
+	// Change references for middle chain
+	head.Next.Next = head
+	head.Next = nil
+
+	return newHead
 }
 
-func recurse(node *Node) *Node {
-	if node.Value == nil { // Encounter dummy tail
-		return node
-	}
+// func recurse(curr, next *Node) *Node {
+//   if next == nil {
+//     return curr
+//   }
 
-	subProb := recurse(node.Next)
-	subProb.Next = node
+//   subProb := recurse(curr.Next, curr.Next.Next)
+//   subProb.Next = curr
 
-	node.Prev = node
-	return subProb
-}
+//   return subProb
+// }
