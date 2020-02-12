@@ -19,7 +19,7 @@ func recurse(s1, s2 []byte, i1, i2 int) int {
 		return 1 + recurse(s1, s2, i1+1, i2+1)
 	}
 
-  return 0
+	return 0
 
 	// return recurse(s1, s2, i1 + 1, i2 + 1)
 
