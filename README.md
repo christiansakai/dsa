@@ -46,3 +46,21 @@ List of problems where the solution might not be that obvious.
         - Edit Distance
         - Strings Interleaving
       - Try to do everything from bottom up style
+  - Patterns for Coding Questions
+      - Sliding Window
+      - Two Pointers
+      - Fast & Slow Pointers
+      - Merge Intervals
+      - Cyclic Sort
+      - Linked List Reversal In Place
+      - BFS
+      - DFS
+      - Two Heaps
+      - Subsets
+      - Modified Binary Search
+      - Bitwise XOR
+      - Top K Elements
+      - K Way Merge
+      - 0/1 Knapsack
+      - Topological Sort
+      - Misc

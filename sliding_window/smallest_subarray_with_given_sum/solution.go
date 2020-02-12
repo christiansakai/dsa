@@ -5,23 +5,21 @@ import "math"
 func Solve(arr []int, s int) int {
 	var min float64 = math.Inf(1)
 
-	for i := 0; i < len(arr); i++ {
-		sum := 0
-		foundGreater := false
-
+	i := 0
+	for i < len(arr) {
 		j := i
-		for ; j < len(arr); j++ {
-			sum += arr[j]
+		sum := 0
 
-			if sum >= s {
-				foundGreater = true
-				break
-			}
+		for ; j < len(arr) && sum < s; j++ {
+			sum += arr[j]
 		}
 
-		if foundGreater {
-			length := j - i + 1
-			min = math.Min(min, float64(length))
+		if sum >= s {
+			min = math.Min(min, float64(j-i+1))
+
+			for ; i < len(arr) && sum >= s; i++ {
+				sum -= arr[i]
+			}
 		}
 	}
 
