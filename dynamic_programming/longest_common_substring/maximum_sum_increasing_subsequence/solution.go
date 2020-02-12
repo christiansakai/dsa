@@ -12,12 +12,12 @@ func TopDown(arr []int) int {
 
 func recurse(arr []int, index int) int {
   if index == len(arr) - 1 {
-    return 1
+    return arr[len(arr) - 1]
   }
 
   var max float64 = 0
   if arr[index] < arr[index + 1] {
-    subProb := 1 + recurse(arr, index + 1) 
+    subProb := arr[index] + recurse(arr, index + 1) 
     max = math.Max(max, float64(subProb))
   }
 
