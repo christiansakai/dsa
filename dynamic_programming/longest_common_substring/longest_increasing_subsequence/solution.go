@@ -2,43 +2,37 @@ package solution
 
 import "math"
 
-func TopDown(sequence []int) int {
-	if len(sequence) <= 1 {
-		return len(sequence)
-	}
+func TopDown(arr []int) int {
+  if len(arr) <= 1 {
+    return len(arr)
+  }
 
-	cache := map[int]map[int]int{}
+  cache := map[int]int{}
 
-	return recurse(sequence, len(sequence), len(sequence)-1, cache)
+  return recurse(arr, 0, cache)
 }
 
-func recurse(sequence []int, i, j int, cache map[int]map[int]int) int {
-	if i == 0 || j == 0 {
-		return 0
-	}
+func recurse(arr []int, index int, cache map[int]int) int {
+  if index == len(arr) - 1 {
+    return 1
+  }
 
-	if _, ok := cache[i]; ok {
-		if result, ok := cache[i][j]; ok {
-			return result
-		}
-	}
+  if result, ok := cache[index]; ok {
+    return result
+  }
 
-	var max float64 = 0
-	if sequence[i] > sequence[j] {
-		with := 1 + recurse(sequence, i, j-1, cache)
-		max = math.Max(max, float64(with))
-	}
+  var max float64 = 0
+  if arr[index] < arr[index + 1] {
+    subProb := 1 + recurse(arr, index + 1, cache) 
+    max = math.Max(max, float64(subProb))
+  }
 
-	without := recurse(sequence, i-1, j, cache)
-	max = math.Max(max, float64(without))
+  nextI := recurse(arr, index + 1, cache)
+  max = math.Max(max, float64(nextI))
 
-	result := int(max)
+  result := int(max)
 
-	if _, ok := cache[i]; !ok {
-		cache[i] = map[int]int{}
-	}
+  cache[index] = result
 
-	cache[i][j] = result
-
-	return int(max)
+  return result
 }
