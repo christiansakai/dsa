@@ -1,59 +1,71 @@
 package solution
 
 func Solve(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil && l2 == nil {
-		return nil
-	}
+	var head *ListNode
+	carry := 0
 
-	if l1 == nil {
-		return l2
-	}
+	for l1 != nil || l2 != nil {
+		if l1 == nil {
+			sum := l2.Val + carry
+			if sum >= 10 {
+				carry = 1
+			}
 
-	if l2 == nil {
-		return l1
-	}
+			remainder := sum - 10
 
-	sum := l1.Val + l2.Val
-	if sum <= 9 {
-		return &ListNode{
-			Val:  sum,
-			Next: Solve(l1.Next, l2.Next),
+			newNode := &ListNode{
+				Val:  remainder,
+				Next: head,
+			}
+
+			head = newNode
+			l2 = l2.Next
+			continue
 		}
-	}
 
-	remainder := sum - 10
-	if l1.Next == nil {
-		l1.Next = &ListNode{
-			Val:  1,
-			Next: nil,
+		if l2 == nil {
+			sum := l1.Val + carry
+			if sum >= 10 {
+				carry = 1
+			}
+
+			remainder := sum - 10
+
+			newNode := &ListNode{
+				Val:  remainder,
+				Next: head,
+			}
+
+			head = newNode
+			l1 = l1.Next
+			continue
 		}
-	} else {
-		l1.Next.Val += 1
-		if l1.Next.Val > 9 {
-			normalize(l1.Next)
+
+		sum := l1.Val + l2.Val + carry
+		if sum >= 10 {
+			carry = 1
 		}
-	}
 
-	return &ListNode{
-		Val:  remainder,
-		Next: Solve(l1.Next, l2.Next),
-	}
-}
+		remainder := sum - 10
 
-func normalize(l *ListNode) {
-	if l == nil {
-		return
-	}
-
-	remainder := l.Val - 10
-	l.Val = remainder
-
-	if l.Next == nil {
-		l.Next = &ListNode{
-			Val:  1,
-			Next: nil,
+		newNode := &ListNode{
+			Val:  remainder,
+			Next: head,
 		}
-	} else {
-		l.Next.Val = 1
+
+		head = newNode
+		l1 = l1.Next
+		l2 = l2.Next
 	}
+
+	if carry > 0 {
+		newNode := &ListNode{
+			Val:  carry,
+			Next: head,
+		}
+
+		head = newNode
+	}
+
+	return head
 }
