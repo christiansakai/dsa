@@ -40,6 +40,8 @@ List of useful patterns
 - DFS Iterative
 - BFS Recursive
 - BFS Iterative
+- Permutation
+- Subset
  
 ## Tricky List
 
