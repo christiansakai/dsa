@@ -5,8 +5,11 @@ func Solve(head *ListNode) *ListNode {
 		return head
 	}
 
-	newHead := Solve(head.Next)
-	newHead.Next = head
+	nextNext := head.Next.Next
+	next := head.Next
 
-	return newHead
+	head.Next = Solve(nextNext)
+	next.Next = head
+
+	return next
 }

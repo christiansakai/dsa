@@ -47,11 +47,11 @@ func TestSolution(t *testing.T) {
 	}
 
 	l4want := &ListNode{
-		Val: 3,
+		Val: 2,
 		Next: &ListNode{
-			Val: 2,
+			Val: 1,
 			Next: &ListNode{
-				Val:  1,
+				Val:  3,
 				Next: nil,
 			},
 		},
@@ -72,13 +72,13 @@ func TestSolution(t *testing.T) {
 	}
 
 	l5want := &ListNode{
-		Val: 4,
+		Val: 2,
 		Next: &ListNode{
-			Val: 3,
+			Val: 1,
 			Next: &ListNode{
-				Val: 2,
+				Val: 4,
 				Next: &ListNode{
-					Val:  1,
+					Val:  3,
 					Next: nil,
 				},
 			},
