@@ -11,31 +11,31 @@
 List of useful patterns
 
 - Sliding Window
+- Two Pointer
 - Binary Search (3 versions)
+    - Template I
 
-  ```python
-  def binarySearch(nums, target):
-    """
-    :type nums: List[int]
-    :type target: int
-    :rtype: int
-    """
-    if len(nums) == 0:
-        return -1
+        For accessing a single index in the array.
 
-    left, right = 0, len(nums) - 1
-    while left <= right:
-        mid = (left + right) // 2
-        if nums[mid] == target:
-            return mid
-        elif nums[mid] < target:
-            left = mid + 1
-        else:
-            right = mid - 1
+        ```go
+        func binarySearch(nums []int, target int) int {
+          left := 0
+          right := len(nums) - 1
 
-    # End Condition: left > right
-    return -1
-  ```
+          for left <= right {
+            mid := left + (right - left) / 2
+            if nums[mid] == target {
+              return mid
+            } else if nums[mid] < target {
+              left = mid + 1
+            } else {
+              right = mid - 1
+            }
+          }
+
+          return -1
+        }
+        ```
 
 - DFS Recursive
 - DFS Iterative
@@ -49,6 +49,7 @@ List of useful patterns
 List of problems where the solution might not be that obvious.
 
 - `data_structures/array_string/rotate_image`
+- `data_structures/array_string/reverse_words_in_a_string`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `recursion/same_with_iteration/square_of_number`
 - `recursion/with_numbers/gcd`
@@ -58,6 +59,7 @@ List of problems where the solution might not be that obvious.
 - `recursion/with_data_structures/reverse_linked_list`
 - `recursion/with_data_structures/reverse_stack`
 - `recursion/with_data_structures/unique_binary_search_trees_2`
+- `two_pointers/remove_nth_node_from_end_of_list`
 
 ## TODO List
 
