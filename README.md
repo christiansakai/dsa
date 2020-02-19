@@ -4,6 +4,7 @@
 
 - educative.io
 - leetcode.com
+- Study Guide https://www.reddit.com/r/cscareerquestions/comments/6luszf/a_leetcode_grinding_guide/?st=J92XK6ZK&sh=c2576763
 
 ## Pattern List
 
@@ -52,8 +53,10 @@ List of problems where the solution might not be that obvious.
 - `recursion/with_numbers/gcd`
 - `recursion/with_numbers/convert_to_binary`
 - `recursion/with_arrays/reverse_array`
+- `recursion/with_strings/remove_invalid_parentheses`
 - `recursion/with_data_structures/reverse_linked_list`
 - `recursion/with_data_structures/reverse_stack`
+- `recursion/with_data_structures/unique_binary_search_trees_2`
 
 ## TODO List
 
