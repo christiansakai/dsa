@@ -48,6 +48,7 @@ List of useful patterns
 
 List of problems where the solution might not be that obvious.
 
+- `data_structures/array_string/rotate_image`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `recursion/same_with_iteration/square_of_number`
 - `recursion/with_numbers/gcd`
