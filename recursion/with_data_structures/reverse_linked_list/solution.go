@@ -5,8 +5,10 @@ func Solve(head *ListNode) *ListNode {
 		return head
 	}
 
-	newHead := Solve(head.Next)
-	newHead.Next = head
+	subProb := Solve(head.Next)
 
-	return newHead
+	head.Next.Next = head
+	head.Next = nil
+
+	return subProb
 }
