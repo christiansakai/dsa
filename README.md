@@ -4,6 +4,7 @@
 
 - educative.io
 - leetcode.com
+- Study Guide https://www.reddit.com/r/cscareerquestions/comments/6luszf/a_leetcode_grinding_guide/?st=J92XK6ZK&sh=c2576763
 
 ## Pattern List
 
