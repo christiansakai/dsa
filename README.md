@@ -6,6 +6,12 @@
 - leetcode.com
 - Study Guide https://www.reddit.com/r/cscareerquestions/comments/6luszf/a_leetcode_grinding_guide/?st=J92XK6ZK&sh=c2576763
 
+## ASCII to Remember
+
+- '0' is 48
+- 'A' is 65
+- 'a' is 97
+
 ## Pattern List
 
 List of useful patterns
@@ -49,6 +55,7 @@ List of useful patterns
 List of problems where the solution might not be that obvious.
 
 - `data_structures/array_string/rotate_image`
+- `data_structures/array_string/group_anagrams`
 - `data_structures/array_string/reverse_words_in_a_string`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `recursion/same_with_iteration/square_of_number`
