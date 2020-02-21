@@ -44,6 +44,7 @@ List of useful patterns
         ```
 
 - DFS Recursive
+    Inorder
 - DFS Iterative
 - BFS Recursive
 - BFS Iterative
@@ -54,6 +55,7 @@ List of useful patterns
 
 List of problems where the solution might not be that obvious.
 
+- `data_structures/array_string/atoi`
 - `data_structures/array_string/rotate_image`
 - `data_structures/array_string/group_anagrams`
 - `data_structures/array_string/reverse_words_in_a_string`
