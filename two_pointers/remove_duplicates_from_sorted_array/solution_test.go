@@ -7,8 +7,8 @@ func TestSolution(t *testing.T) {
 		Input  []int
 		Output int
 	}{
-		{[]int{2, 2, 1}, 1},
-		{[]int{4, 1, 2, 1, 2}, 4},
+		{[]int{1, 1, 2}, 2},
+		{[]int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}, 5},
 	}
 
 	for _, tt := range tests {

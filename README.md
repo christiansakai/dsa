@@ -56,6 +56,7 @@ List of useful patterns
 List of problems where the solution might not be that obvious.
 
 - `data_structures/array_string/atoi`
+- `data_structures/array_string/product_of_array_except_self`
 - `data_structures/array_string/rotate_image`
 - `data_structures/array_string/group_anagrams`
 - `data_structures/array_string/reverse_words_in_a_string`
@@ -69,6 +70,7 @@ List of problems where the solution might not be that obvious.
 - `recursion/with_data_structures/reverse_stack`
 - `recursion/with_data_structures/unique_binary_search_trees_2`
 - `two_pointers/remove_nth_node_from_end_of_list`
+- `two_pointers/array_string/remove_duplicates_from_sorted_array`
 
 ## TODO List
 
