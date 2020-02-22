@@ -71,6 +71,7 @@ List of problems where the solution might not be that obvious.
 - `recursion/with_data_structures/unique_binary_search_trees_2`
 - `two_pointers/remove_nth_node_from_end_of_list`
 - `two_pointers/array_string/remove_duplicates_from_sorted_array`
+- `sort_search/search_in_rotated_sorted_array/`
 
 ## TODO List
 
