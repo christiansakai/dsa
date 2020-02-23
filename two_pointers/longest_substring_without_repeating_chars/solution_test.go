@@ -8,12 +8,12 @@ func TestSolution(t *testing.T) {
 		Input  string
 		Output int
 	}{
-		// {"", 0},
-		// {" ", 1},
-		// {"au", 2},
-		// {"abcabcbb", 3},
-		// {"bbbbb", 1},
-		// {"pwwkew", 3},
+		{"", 0},
+		{" ", 1},
+		{"au", 2},
+		{"abcabcbb", 3},
+		{"bbbbb", 1},
+		{"pwwkew", 3},
 	}
 
 	for _, tt := range tests {

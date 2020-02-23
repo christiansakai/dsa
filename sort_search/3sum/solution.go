@@ -1,49 +1,62 @@
 package solution
 
-import (
-	"strconv"
-	// "fmt"
-	"strings"
-)
+import "sort"
 
 func Solve(nums []int) [][]int {
 	if len(nums) < 3 {
 		return [][]int{}
 	}
 
-	hashMap := map[string][]int{}
-
-	for i := 0; i < len(nums)-2; i++ {
-		for j := i + 1; j < len(nums)-1; j++ {
-			remainder := 0 - (nums[i] + nums[j])
-
-			k := binarySearch(nums, j+1, len(nums)-1, remainder)
-			if k != -1 {
-				threeSum := []int{
-					nums[i],
-					nums[j],
-					nums[k],
-				}
-
-				hashedStr := toString(threeSum)
-				hashMap[hashedStr] = threeSum
-			}
-		}
-	}
+	sort.Sort(increasing(nums))
 
 	result := [][]int{}
-	for _, v := range hashMap {
-		result = append(result, v)
+
+	i := 0
+	for i < len(nums)-2 {
+		j := i + 1
+		for j < len(nums)-1 {
+			remaining := 0 - (nums[i] + nums[j])
+
+			k := binarySearch(nums, j+1, remaining)
+
+			if k != -1 {
+				result = append(result, []int{
+					nums[i], nums[j], nums[k],
+				})
+			}
+
+			for ; j+1 < len(nums)-1 && nums[j] == nums[j+1]; j++ {
+			}
+			j++
+		}
+
+		for ; i+1 < len(nums)-2 && nums[i] == nums[i+1]; i++ {
+		}
+		i++
 	}
 
 	return result
 }
 
-func binarySearch(nums []int, from, to, target int) int {
-	left := from
-	right := to
+type increasing []int
 
-	for left <= right {
+func (a increasing) Len() int {
+	return len(a)
+}
+
+func (a increasing) Less(i, j int) bool {
+	return a[i] < a[j]
+}
+
+func (a increasing) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
+}
+
+func binarySearch(nums []int, start, target int) int {
+	left := start
+	right := len(nums) - 1
+
+	for left < right {
 		mid := left + (right-left)/2
 		if nums[mid] == target {
 			return mid
@@ -55,13 +68,4 @@ func binarySearch(nums []int, from, to, target int) int {
 	}
 
 	return -1
-}
-
-func toString(triplets []int) string {
-	b := []string{}
-	for _, el := range triplets {
-		b = append(b, strconv.Itoa(el))
-	}
-
-	return strings.Join(b, "#")
 }
