@@ -12,7 +12,7 @@ func TestSolution(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := Solve(tt.input.nums, tt.input.target)
+		got := Solve(tt.input)
 
 		if got != tt.output {
 			t.Errorf("got %d, want %d", got, tt.output)

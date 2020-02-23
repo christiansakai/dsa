@@ -1,15 +1,16 @@
 package solution
 
-func Solve(x int) int {
+func Solve(n int, guess func(int) int) int {
 	left := 0
-	right := x
+	right := n
 
 	for left <= right {
 		mid := left + (right-left)/2
-		midSqr := mid * mid
+		called := guess(mid)
 
-		if midSqr == x {
-		} else if midSqr < x {
+		if called == 0 {
+			return mid
+		} else if called == 1 {
 			left = mid + 1
 		} else {
 			right = mid - 1

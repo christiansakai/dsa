@@ -21,7 +21,10 @@ List of useful patterns
 - Binary Search (3 versions)
     - Template I
 
-        For accessing a single index in the array.
+        - Most basic and elementary form of Binary Search
+        - For accessing a single index in the array.
+        - Search condition can be determined without comparing to the element's neighbors (or use specific elements around it)
+        - No post-processing required because at each step, you are checking to see if the element has been found. If you reach the end, then you know the element is not found.
 
         ```go
         func binarySearch(nums []int, target int) int {
@@ -42,6 +45,92 @@ List of useful patterns
           return -1
         }
         ```
+
+        Distinguishing syntax:
+        - Initial condition: `left = 0, right = length - 1`
+        - Termination `left > right`
+        - Searching left `right = mid - 1`
+        - Searching righ `left = mid + 1`
+
+    - Template II
+
+    An advanced way to implement Binary Search.
+      - Search condition needs to access element's immediate right neighbor
+      - Use element's right neighbor to determine if condition is met and decide whether to go left or right
+      - Guarantees search space is at least 2 in size at each step
+      - Post-processing required. Loop/recursion ends when you have 1 element left. Need to assess if the remaining element meets the condition.
+
+    ```java
+       int binarySearch(int[] nums, int target){
+      if(nums == null || nums.length == 0)
+        return -1;
+
+      int left = 0, right = nums.length;
+      while(left < right){
+        // Prevent (left + right) overflow
+        int mid = left + (right - left) / 2;
+        if(nums[mid] == target){ return mid; }
+        else if(nums[mid] < target) { left = mid + 1; }
+        else { right = mid; }
+      }
+
+      // Post-processing:
+      // End Condition: left == right
+      if(left != nums.length && nums[left] == target) return left;
+      return -1;
+    }
+    ```
+
+        Distinguishing syntax:
+        - Initial condition: `left = 0, right = length`
+        - Termination `left == right`
+        - Searching left `right = mid`
+        - Searching righ `left = mid + 1`
+        -
+        -
+    - Template III
+    -
+    - ```java
+    - int binarySearch(int[] nums, int target) {
+    if (nums == null || nums.length == 0)
+        return -1;
+
+    int left = 0, right = nums.length - 1;
+    while (left + 1 < right){
+        // Prevent (left + right) overflow
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) {
+            return mid;
+        } else if (nums[mid] < target) {
+            left = mid;
+        } else {
+            right = mid;
+        }
+    }
+
+    // Post-processing:
+    // End Condition: left + 1 == right
+    if(nums[left] == target) return left;
+    if(nums[right] == target) return right;
+    return -1;
+}
+```
+
+
+    An alternative way to implement Binary Search
+    Search Condition needs to access element's immediate left and right neighbors
+    Use element's neighbors to determine if condition is met and decide whether to go left or right
+    Gurantees Search Space is at least 3 in size at each step
+    Post-processing required. Loop/Recursion ends when you have 2 elements left. Need to assess if the remaining elements meet the condition.
+
+        Distinguishing syntax:
+
+    Initial Condition: left = 0, right = length-1
+    Termination: left + 1 == right
+    Searching Left: right = mid
+    Searching Right: left = mid
+
+
 
 - DFS Recursive
     Inorder
@@ -71,7 +160,9 @@ List of problems where the solution might not be that obvious.
 - `recursion/with_data_structures/unique_binary_search_trees_2`
 - `two_pointers/remove_nth_node_from_end_of_list`
 - `two_pointers/array_string/remove_duplicates_from_sorted_array`
+- `sort_search/two_sum_2/`
 - `sort_search/search_in_rotated_sorted_array/`
+- `sort_search/intersection_of_two_arrays_2/`
 
 ## TODO List
 
