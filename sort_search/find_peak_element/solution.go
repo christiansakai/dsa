@@ -8,25 +8,18 @@ func Solve(nums []int) int {
 	left := 0
 	right := len(nums) - 1
 
-	for left+1 < right {
+	for left < right {
 		mid := left + (right-left)/2
 
-		if nums[mid] == target {
-			return mid
-		} else if nums[mid] < target {
-			left = mid
-		} else {
+		// If the mid element is on descending slope
+		if nums[mid] > nums[mid+1] {
+			// then the peak must be on the right
 			right = mid
+		} else { // If the mid element is on the ascending slope
+			// then the peak must be on the left
+			left = mid + 1
 		}
 	}
 
-	if nums[left] == target {
-		return left
-	}
-
-	if nums[right] == target {
-		return right
-	}
-
-	return -1
+	return left
 }
