@@ -11,28 +11,21 @@ func Solve(nums []int) [][]int {
 
 	result := [][]int{}
 
-	i := 0
-	for i < len(nums)-2 {
-		j := i + 1
-		for j < len(nums)-1 {
-			remaining := 0 - (nums[i] + nums[j])
+	for i := 0; i < len(nums)-2; i++ {
+		remainder := 0 - nums[i]
 
-			k := binarySearch(nums, j+1, remaining)
+		points := getTwoSums(nums, i+1, remainder)
 
-			if k != -1 {
-				result = append(result, []int{
-					nums[i], nums[j], nums[k],
-				})
-			}
-
-			for ; j+1 < len(nums)-1 && nums[j] == nums[j+1]; j++ {
-			}
-			j++
+		for _, p := range points {
+			result = append(result, []int{
+				nums[i],
+				nums[p.j],
+				nums[p.k],
+			})
 		}
 
-		for ; i+1 < len(nums)-2 && nums[i] == nums[i+1]; i++ {
+		for ; i < len(nums)-2 && nums[i] == nums[i+1]; i++ {
 		}
-		i++
 	}
 
 	return result
@@ -52,20 +45,35 @@ func (a increasing) Swap(i, j int) {
 	a[i], a[j] = a[j], a[i]
 }
 
-func binarySearch(nums []int, start, target int) int {
+type twoSum struct {
+	j int
+	k int
+}
+
+func getTwoSums(nums []int, start, target int) []twoSum {
+	result := []twoSum{}
+
 	left := start
 	right := len(nums) - 1
 
 	for left < right {
-		mid := left + (right-left)/2
-		if nums[mid] == target {
-			return mid
-		} else if nums[mid] < target {
-			left = mid + 1
+		sum := nums[left] + nums[right]
+		if sum == target {
+			result = append(result, twoSum{left, right})
+
+			left += 1
+			right -= 1
+
+			for ; left < right && nums[left-1] == nums[left]; left++ {
+			}
+			for ; left < right && nums[right] == nums[right+1]; right-- {
+			}
+		} else if sum < target {
+			left++
 		} else {
-			right = mid - 1
+			right--
 		}
 	}
 
-	return -1
+	return result
 }
