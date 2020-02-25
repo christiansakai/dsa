@@ -1,149 +1,468 @@
 # Data Structures and Algorithms
 
+Repository for my practice of Data Structures and Algorithms
+
 ## Resources
 
 - educative.io
 - leetcode.com
-- Study Guide https://www.reddit.com/r/cscareerquestions/comments/6luszf/a_leetcode_grinding_guide/?st=J92XK6ZK&sh=c2576763
+- [Study Guide](https://www.reddit.com/r/cscareerquestions/comments/6luszf/a_leetcode_grinding_guide/?st=J92XK6ZK&sh=c2576763)
 
-## ASCII to Remember
+## Patterns to Remember
+### ASCII
 
 - '0' is 48
 - 'A' is 65
 - 'a' is 97
 
-## Pattern List
+### Sliding Window
 
-List of useful patterns
+### Two Pointer
 
-- Sliding Window
-- Two Pointer
-- Binary Search (3 versions)
-    - Template I
+### Binary Search
+#### Pattern I
 
-        - Most basic and elementary form of Binary Search
-        - For accessing a single index in the array.
-        - Search condition can be determined without comparing to the element's neighbors (or use specific elements around it)
-        - No post-processing required because at each step, you are checking to see if the element has been found. If you reach the end, then you know the element is not found.
+```go
+func binarySearch(nums []int, target int) int {
+  if len(nums) == 0 {
+    return -1
+  }
 
-        ```go
-        func binarySearch(nums []int, target int) int {
-          left := 0
-          right := len(nums) - 1
+  left := 0
+  right := len(nums) - 1
 
-          for left <= right {
-            mid := left + (right - left) / 2
-            if nums[mid] == target {
-              return mid
-            } else if nums[mid] < target {
-              left = mid + 1
-            } else {
-              right = mid - 1
-            }
-          }
-
-          return -1
-        }
-        ```
-
-        Distinguishing syntax:
-        - Initial condition: `left = 0, right = length - 1`
-        - Termination `left > right`
-        - Searching left `right = mid - 1`
-        - Searching righ `left = mid + 1`
-
-    - Template II
-
-    An advanced way to implement Binary Search.
-      - Search condition needs to access element's immediate right neighbor
-      - Use element's right neighbor to determine if condition is met and decide whether to go left or right
-      - Guarantees search space is at least 2 in size at each step
-      - Post-processing required. Loop/recursion ends when you have 1 element left. Need to assess if the remaining element meets the condition.
-
-    ```java
-       int binarySearch(int[] nums, int target){
-      if(nums == null || nums.length == 0)
-        return -1;
-
-      int left = 0, right = nums.length;
-      while(left < right){
-        // Prevent (left + right) overflow
-        int mid = left + (right - left) / 2;
-        if(nums[mid] == target){ return mid; }
-        else if(nums[mid] < target) { left = mid + 1; }
-        else { right = mid; }
-      }
-
-      // Post-processing:
-      // End Condition: left == right
-      if(left != nums.length && nums[left] == target) return left;
-      return -1;
+  for left <= right {
+    mid := left + (right - left) / 2
+    if nums[mid] == target {
+      return mid
+    } else if nums[mid] < target {
+      left = mid + 1
+    } else {
+      right = mid - 1
     }
-    ```
+  }
 
-        Distinguishing syntax:
-        - Initial condition: `left = 0, right = length`
-        - Termination `left == right`
-        - Searching left `right = mid`
-        - Searching righ `left = mid + 1`
-        -
-        -
-    - Template III
-    -
-    - ```java
-    - int binarySearch(int[] nums, int target) {
-    if (nums == null || nums.length == 0)
-        return -1;
-
-    int left = 0, right = nums.length - 1;
-    while (left + 1 < right){
-        // Prevent (left + right) overflow
-        int mid = left + (right - left) / 2;
-        if (nums[mid] == target) {
-            return mid;
-        } else if (nums[mid] < target) {
-            left = mid;
-        } else {
-            right = mid;
-        }
-    }
-
-    // Post-processing:
-    // End Condition: left + 1 == right
-    if(nums[left] == target) return left;
-    if(nums[right] == target) return right;
-    return -1;
+  return -1
 }
 ```
 
+Description:
+- Most basic and elementary form of Binary Search
+- For accessing a single index in the array.
+- Search condition can be determined without comparing to the element's neighbors (or use specific elements around it)
+- No post-processing required because at each step, you are checking to see if the element has been found. If you reach the end, then you know the element is not found.
 
-    An alternative way to implement Binary Search
-    Search Condition needs to access element's immediate left and right neighbors
-    Use element's neighbors to determine if condition is met and decide whether to go left or right
-    Gurantees Search Space is at least 3 in size at each step
-    Post-processing required. Loop/Recursion ends when you have 2 elements left. Need to assess if the remaining elements meet the condition.
+Distinguishing syntax:
+- Initial condition: `left = 0, right = length - 1`
+- Termination `left > right`
+- Searching left `right = mid - 1`
+- Searching righ `left = mid + 1`
 
-        Distinguishing syntax:
+#### Pattern II
 
-    Initial Condition: left = 0, right = length-1
-    Termination: left + 1 == right
-    Searching Left: right = mid
-    Searching Right: left = mid
+```go
+func binarySearch(nums []int, target int) int {
+  if len(nums) == 0 {
+    return -1
+  }
 
+  left := 0
+  right := len(nums) - 1
 
+  for left < right {
+    mid := left + (right - left) / 2
+    if nums[mid] == target {
+      return mid
+    } else if nums[mid] < target {
+      left = mid + 1
+    } else {
+      right = mid
+    }
+  }
 
-- DFS Recursive
-    Inorder
-- DFS Iterative
-- BFS Recursive
-- BFS Iterative
-- Permutation
-- Subset
+  if left != nums.length && nums[left] == target {
+    return left
+  }
+
+  return -1
+}
+```
+
+Description:
+- An advanced way to implement Binary Search.
+- Search condition needs to access element's immediate right neighbor
+- Use element's right neighbor to determine if condition is met and decide whether to go left or right
+- Guarantees search space is at least 2 in size at each step
+- Post-processing required. Loop/recursion ends when you have 1 element left. Need to assess if the remaining element meets the condition.
+
+Distinguishing syntax:
+- Initial condition: `left = 0, right = length`
+- Termination `left == right`
+- Searching left `right = mid`
+- Searching righ `left = mid + 1`
+
+#### Pattern II
+
+```go
+func binarySearch(nums []int, target int) int {
+  if len(nums) == 0 {
+    return -1
+  }
+
+  left := 0
+  right := len(nums) - 1
+
+  for left + 1 < right {
+    mid := left + (right - left) / 2
+    if nums[mid] == target {
+      return mid
+    } else if nums[mid] < target {
+      left = mid
+    } else {
+      right = mid
+    }
+  }
+
+  if nums[left] == target {
+    return left
+  }
+
+  if nums[right] == target {
+    return right
+  }
+
+  return -1
+}
+```
+
+Description:
+- An alternative way to implement Binary Search
+- Search Condition needs to access element's immediate left and right neighbors
+- Use element's neighbors to determine if condition is met and decide whether to go left or right
+- Guarantees Search Space is at least 3 in size at each step
+- Post-processing required. Loop/Recursion ends when you have 2 elements left. Need to assess if the remaining elements meet the condition.
+
+Distinguishing syntax:
+- Initial Condition: left = 0, right = length-1
+- Termination: left + 1 == right
+- Searching Left: right = mid
+- Searching Right: left = mid
+
+### Tree Traversal
+#### In Order
+##### Iterative
+
+```go
+func iterativeInorder(root *TreeNode) []int {
+  result := []int{}
+
+  if root == nil {
+    return result
+  }
+
+  current := root
+  stack := []*TreeNode{}
+
+  for current != nil || len(stack) > 0 {
+    for current != nil {
+      stack = append(stack, current)
+      current = current.Left
+    }
+
+    current = stack[len(stack) - 1]
+    stack = stack[:len(stack) - 1]
+
+    result = append(result, current.Val)
+    current = current.Right
+  }
+
+  return result
+}
+```
+
+##### Recursive
+
+```go
+func recursiveInOrder(root *TreeNode) []int {
+  result := []int{}
+
+  if root == nil {
+    return result
+  }
+
+  recurse(root, &result)
+
+  return result
+}
+
+func recurse(root *TreeNode, result *[]int) {
+  if root == nil {
+    return
+  }
+
+  recurse(root.Left, result)
+  *result = append(*result, root.Val)
+  recurse(root.Right, result)
+}
+```
+
+#### Pre Order
+##### Iterative
+
+```go
+func iterativePreOrder(root *TreeNode) []int {
+  result := []int{}
+
+  if root == nil {
+    return result
+  }
+
+  stack := []*TreeNode{root}
+
+  for len(stack) > 0 {
+    node := stack[len(stack) - 1]
+    stack = stack[:len(stack) - 1]
+
+    result = append(result, node.Val)
+
+    if node.Right != nil {
+      stack = append(stack, node.Right)
+    }
+
+    if node.Left != nil {
+      stack = append(stack, node.Left)
+    }
+  }
+
+  return result
+}
+```
+
+##### Recursive
+
+```go
+func recursivePreOrder(root *TreeNode) []int {
+  result := []int{}
+
+  if root == nil {
+    return result
+  }
+
+  recurse(root, &result)
+
+  return result
+}
+
+func recurse(root *TreeNode, result *[]int) {
+  if root == nil {
+    return
+  }
+
+  *result = append(*result, root.Val)
+  recurse(root.Left, result)
+  recurse(root.Right, result)
+}
+```
+
+#### Post Order
+##### Iterative
+
+```go
+func iterativePostOrder(root *TreeNode) []int {
+  result := []int{}
+
+  if root == nil {
+    return result
+  }
+
+  stack := []*TreeNode{root}
+
+  for len(stack) > 0 {
+    node := stack[len(stack) - 1]
+    stack = stack[:len(stack) - 1]
+
+    result = append(result, node.Val)
+
+    if node.Left != nil {
+      stack = append(stack, node.Left)
+    }
+
+    if node.Right != nil {
+      stack = append(stack, node.Right)
+    }
+  }
+
+  reverse(result)
+
+  return result
+}
+```
+
+##### Recursive
+
+```go
+func recursivePostOrder(root *TreeNode) []int {
+  result := []int{}
+
+  if root == nil {
+    return result
+  }
+
+  recurse(root, &result)
+
+  return result
+}
+
+func recurse(root *TreeNode, result *[]int) {
+  if root == nil {
+    return
+  }
+
+  recurse(root.Left, result)
+  recurse(root.Right, result)
+  *result = append(*result, root.Val)
+}
+```
+
+#### Level Order
+##### Iterative
+
+```go
+func iterativeLevelOrder(root *TreeNode) [][]int {
+  result := [][]int{}
+
+  if root == nil {
+    return result
+  }
+
+  queue := []*TreeNode{root}
+
+  for len(queue) > 0 {
+    level := []int{}
+    qLen := len(queue)
+
+    for i := 0; i < qLen; i++ {
+      node := queue[0]
+      queue = queue[1:]
+
+      level = append(level, node.Val)
+
+      if node.Left != nil {
+        queue = append(queue, node.Left)
+      }
+
+      if node.Right != nil {
+        queue = append(queue, node.Right)
+      }
+    }
+
+    result = append(result, level)
+  }
+
+  return result
+}
+```
+
+##### Recursive
+
+```go
+func recursiveLevelOrder(root *TreeNode) [][]int {
+  result := [][]int{}
+
+  if root == nil {
+    return result
+  }
+
+  level := 0
+  recurse(root, level, &result)
+
+  return result
+}
+
+func recurse(root *TreeNode, level int, result *[][]int) {
+  if root == nil {
+    return
+  }
+
+  if len(*result) - 1 < level {
+    newLevel := []int{}
+    *result = append(*result, newLevel)
+  }
+
+  (*result)[level] = append((*result)[level], root.Val)
+  recurse(root.Left, level + 1, result)
+  recurse(root.Right, level + 1, result)
+}
+```
+
+### Permutation
+
+```go
+func generatePermutation(choices []int) [][]int {
+  result := [][]int{}
+
+  if len(nums) == 0 {
+    return result
+  }
+
+  permutation := []int{}
+
+  recurse(nums, &permutation, &result)
+
+  return result
+}
+
+func recurse(choices []int, permutation *[]int, result *[][]int) {
+  if len(choice) == 0 {
+    *result = append(*result, createCopy(permutation))
+    return
+  }
+
+  for i := 0; i < len(choices); i++ {
+    newChoices := createNewChoicesExceptCurrent(choices, i)
+
+    *permutation = append(permutation, choices[i])
+    recurse(newChoices, permutation, result)
+    *permutation = (*permutation)[:len(*permutation) - 1]
+  }
+}
+```
+
+### Subset
+
+```go
+func generateSubsets(set []int) [][]int {
+  result := [][]int{}
+
+  if len(nums) == 0 {
+    return result
+  }
+
+  subset := []int{}
+  startIndex := 0
+
+  recurse(set, startIndex, &subset, &result)
+
+  return result
+}
+
+func recurse(set []int, index int, subset *[]int, result *[][]int) {
+  if index == len(nums) {
+    *result = append(*result, createCopy(*subset))
+    return
+  }
+  
+  recurse(nums, index + 1, subset, result)
+
+  *subset = append(*subset, nums[index])
+  recurse(nums, index + 1, subset, result)
+  *subset = (*subset)[:len(*subset) - 1]
+}
+```
  
 ## Tricky List
 
-List of problems where the solution might not be that obvious.
-
+List of problems where I can't finish the solution in under 30 mins:
 - `data_structures/array_string/atoi`
 - `data_structures/array_string/product_of_array_except_self`
 - `data_structures/array_string/rotate_image`
@@ -169,7 +488,6 @@ List of problems where the solution might not be that obvious.
 - `sort_search/3sum`
 
 ## TODO List
-
 - Educative.io
   - Dynamic Programming
       - Palindromic Subsequence
