@@ -1,5 +1,7 @@
 package solution
 
+import "fmt"
+
 func Solve(nums []int) {
 	if len(nums) == 0 {
 		return
@@ -7,12 +9,15 @@ func Solve(nums []int) {
 
 	decreasingSubsequenceStartIndex := findDecreasingSubsequenceStartIndex(nums)
 	if decreasingSubsequenceStartIndex == 0 {
+		reverse(nums, 0, len(nums)-1)
 		return
 	}
 
+	fmt.Println(decreasingSubsequenceStartIndex)
+
 	needToBeSwapped := decreasingSubsequenceStartIndex - 1
 
-	nextBiggerElementIndex := findNextBiggerElement(
+	nextBiggerElementIndex := findNextBiggerElementFromRight(
 		nums,
 		decreasingSubsequenceStartIndex,
 		nums[needToBeSwapped],
@@ -20,21 +25,20 @@ func Solve(nums []int) {
 
 	if nextBiggerElementIndex != -1 {
 		swap(nums, needToBeSwapped, nextBiggerElementIndex)
-
 		reverse(nums, needToBeSwapped+1, len(nums)-1)
 	}
 }
 
 func findDecreasingSubsequenceStartIndex(nums []int) int {
 	i := len(nums) - 1
-	for ; i >= 0 && nums[i] > nums[i+1]; i-- {
+	for ; i > 0 && (nums[i-1] >= nums[i]); i-- {
 	}
 
 	return i
 }
 
-func findNextBiggerElement(nums []int, start, element int) int {
-	for i := start; i < len(nums)-1; i++ {
+func findNextBiggerElementFromRight(nums []int, start, element int) int {
+	for i := len(nums) - 1; i >= start; i-- {
 		if nums[i] > element {
 			return i
 		}

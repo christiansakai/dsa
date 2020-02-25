@@ -149,6 +149,7 @@ List of problems where the solution might not be that obvious.
 - `data_structures/array_string/rotate_image`
 - `data_structures/array_string/group_anagrams`
 - `data_structures/array_string/reverse_words_in_a_string`
+- `data_structures/array_string/next_permutation`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `recursion/same_with_iteration/square_of_number`
 - `recursion/with_numbers/gcd`
