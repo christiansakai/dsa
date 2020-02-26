@@ -365,6 +365,8 @@ func iterativeLevelOrder(root *TreeNode) [][]int {
 
 ##### Recursive
 
+Warning! This is not really BFS because by nature recursion is DFS. See GeeksforGeeks for more.
+
 ```go
 func recursiveLevelOrder(root *TreeNode) [][]int {
   result := [][]int{}
