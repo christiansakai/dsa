@@ -12,14 +12,14 @@ func TestSolution(t *testing.T) {
 		{10, "Ten"},
 		{20, "Twenty"},
 		{100, "One Hundred"},
-		// {123, "One Hundred Twentry Three"},
+		{123, "One Hundred Twentry Three"},
 		{1000, "One Thousand"},
 		{10000, "Ten Thousand"},
-		// {12345, "Twelve Thousand Three Hundred Forty Five"},
+		{12345, "Twelve Thousand Three Hundred Forty Five"},
 		{100000, "One Hundred Thousand"},
-		// {123456, "One Hundred Twenty Three Thousand Four Hundred Fifty Six"},
-		// {1234567, "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"},
-		// {1234567891, "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"},
+		{123456, "One Hundred Twenty Three Thousand Four Hundred Fifty Six"},
+		{1234567, "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"},
+		{1234567891, "One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred Ninety One"},
 	}
 
 	for _, tt := range tests {

@@ -472,7 +472,9 @@ List of problems where I can't finish the solution in under 30 mins:
 - `data_structures/array_string/reverse_words_in_a_string`
 - `data_structures/array_string/next_permutation`
 - `data_structures/binary_tree/diameter_of_binary_tree`
+- `data_structures/binary_tree/binary_tree_maximum_path_sum`
 - `data_structures/binary_tree/lowest_common_ancestor`
+- `data_structures/binary_tree/binary_tree_vertical_order_traversal`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `recursion/same_with_iteration/square_of_number`
 - `recursion/with_numbers/gcd`
