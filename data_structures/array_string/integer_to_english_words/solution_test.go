@@ -12,7 +12,7 @@ func TestSolution(t *testing.T) {
 		{10, "Ten"},
 		{20, "Twenty"},
 		{100, "One Hundred"},
-		{123, "One Hundred Twentry Three"},
+		{123, "One Hundred Twenty Three"},
 		{1000, "One Thousand"},
 		{10000, "Ten Thousand"},
 		{12345, "Twelve Thousand Three Hundred Forty Five"},
