@@ -5,18 +5,27 @@ func Solve(root *TreeNode) {
 		return
 	}
 
-	Solve(root.Left)
-	Solve(root.Right)
+	recurse(root)
+}
 
-	tempLeft := root.Left
-	tempRight := root.Right
+func recurse(root *TreeNode) *TreeNode {
+	if root == nil {
+		return nil
+	}
+
+	left := recurse(root.Left)
+	right := recurse(root.Right)
 
 	root.Left = nil
-	root.Right = tempLeft
+	root.Right = left
+
+	tempLeft := left
+	for tempLeft.Right != nil {
+		tempLeft = tempLeft.Right
+	}
 
 	tempLeft.Left = nil
-	tempLeft.Right = tempRight
+	tempLeft.Right = right
 
-	tempRight.Left = nil
-	tempRight.Right = nil
+	return root
 }
