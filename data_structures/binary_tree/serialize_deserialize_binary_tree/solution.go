@@ -1,79 +1,64 @@
 package solution
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
+	// "fmt"
 )
 
-func SolveSerialize(root *node) string {
+func SolveSerialize(root *TreeNode) string {
 	if root == nil {
 		return ""
 	}
 
-	arr := []string{}
-	queue := []*node{root}
+	result := []string{}
+	recurseSerialize(root, &result)
 
-	for len(queue) > 0 {
-		qLen := len(queue)
-		fmt.Println(qLen)
-		for i := 0; i < qLen; i++ {
-			head := queue[0]
-			queue = queue[:len(queue)-1]
-
-			if head == nil {
-				arr = append(arr, "nil")
-			} else {
-				arr = append(arr, strconv.Itoa(head.val))
-
-				queue = append(queue, head.left)
-				queue = append(queue, head.right)
-			}
-		}
-	}
-
-	return toString(arr)
+	return strings.Join(result, ",")
 }
 
-func toString(arr []string) string {
-	str := ""
-	for i, el := range arr {
-		if i == len(arr)-1 {
-			str += el + ","
-		} else {
-			str += el
-		}
+func recurseSerialize(root *TreeNode, result *[]string) {
+	if root == nil {
+		*result = append(*result, "nil")
+		return
 	}
 
-	return str
+	*result = append(*result, strconv.Itoa(root.Val))
+	recurseSerialize(root.Left, result)
+	recurseSerialize(root.Right, result)
 }
 
-func SolveDeserialize(s string) *node {
-	if len(s) == 0 {
+func SolveDeserialize(str string) *TreeNode {
+	if len(str) == 0 {
 		return nil
 	}
 
-	arr := strings.Split(s, ",")
+	strArr := strings.Split(str, ",")
 
-	return recurse(arr, 0)
+	val, _ := strconv.Atoi(strArr[0])
+	root := &TreeNode{Val: val}
+
+	recurseDeserialize(strArr, 2, root)
+	recurseDeserialize(strArr, 3, root)
+
+	return root
 }
 
-func recurse(arr []string, index int) *node {
-	// fmt.Println(index)
-	if index >= len(arr) {
-		return nil
+func recurseDeserialize(strs []string, index int, root *TreeNode) {
+	adjustedIndex := index - 1
+	if adjustedIndex >= len(strs) {
+		return
 	}
 
-	val := arr[index]
-	if val == "nil" {
-		return nil
-	}
+	val, _ := strconv.Atoi(strs[adjustedIndex])
+	node := &TreeNode{Val: val}
 
-	intVal, _ := strconv.Atoi(val)
+	recurseDeserialize(strs, index*2, node)
+	recurseDeserialize(strs, (index*2)+1, node)
 
-	return &node{
-		val:   intVal,
-		left:  recurse(arr, (2*index)+1),
-		right: recurse(arr, (2*index)+2),
+	if index%2 == 0 {
+		root.Left = node
+	} else {
+		root.Right = node
 	}
 }

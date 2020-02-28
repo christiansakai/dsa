@@ -464,7 +464,7 @@ func recurse(set []int, index int, subset *[]int, result *[][]int) {
  
 ## Tricky List
 
-List of problems where I can't finish the solution in under 30 mins:
+List of problems where it seems tricky:
 - `data_structures/array_string/atoi`
 - `data_structures/array_string/product_of_array_except_self`
 - `data_structures/array_string/rotate_image`
@@ -472,10 +472,12 @@ List of problems where I can't finish the solution in under 30 mins:
 - `data_structures/array_string/reverse_words_in_a_string`
 - `data_structures/array_string/next_permutation`
 - `data_structures/array_string/integer_to_english_words`
+- `data_structures/linked_list/reorder_list`
 - `data_structures/binary_tree/diameter_of_binary_tree`
 - `data_structures/binary_tree/binary_tree_maximum_path_sum`
 - `data_structures/binary_tree/lowest_common_ancestor`
 - `data_structures/binary_tree/binary_tree_vertical_order_traversal`
+- `data_structures/binary_tree/serialize_deserialize_binary_tree`
 - `data_structures/graph/find_the_celebrity`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `recursion/same_with_iteration/square_of_number`
@@ -493,6 +495,7 @@ List of problems where I can't finish the solution in under 30 mins:
 - `sort_search/search_in_rotated_sorted_array/`
 - `sort_search/intersection_of_two_arrays_2/`
 - `sort_search/find_peak_element/`
+- `sort_search/meeting_rooms_2/`
 - `sort_search/3sum`
 
 ## TODO List
