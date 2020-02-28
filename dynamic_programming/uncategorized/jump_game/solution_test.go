@@ -3,24 +3,21 @@ package solution
 import "testing"
 
 func TestSolution(t *testing.T) {
-	type input struct {
-		m int
-		n int
-	}
-
 	tests := []struct {
-		input  input
-		output int
+		input  []int
+		output bool
 	}{
-		{input{3, 2}, 3},
+		{[]int{2, 3, 1, 1, 4}, true},
+		{[]int{3, 2, 1, 0, 4}, false},
+		{[]int{0, 2, 3}, false},
 	}
 
 	t.Run("Bottom-up Dynamic Programming", func(t *testing.T) {
 		for _, tt := range tests {
-			got := Solve(tt.input.m, tt.input.n)
+			got := BottomUp(tt.input)
 
 			if got != tt.output {
-				t.Errorf("got %d, want %d", got, tt.output)
+				t.Errorf("got %t, want %t", got, tt.output)
 			}
 		}
 	})
