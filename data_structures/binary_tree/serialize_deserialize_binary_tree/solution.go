@@ -3,7 +3,6 @@ package solution
 import (
 	"strconv"
 	"strings"
-	// "fmt"
 )
 
 func SolveSerialize(root *TreeNode) string {
@@ -34,31 +33,24 @@ func SolveDeserialize(str string) *TreeNode {
 	}
 
 	strArr := strings.Split(str, ",")
-
-	val, _ := strconv.Atoi(strArr[0])
-	root := &TreeNode{Val: val}
-
-	recurseDeserialize(strArr, 2, root)
-	recurseDeserialize(strArr, 3, root)
-
-	return root
+	return recurse(&strArr)
 }
 
-func recurseDeserialize(strs []string, index int, root *TreeNode) {
-	adjustedIndex := index - 1
-	if adjustedIndex >= len(strs) {
-		return
+func recurse(str *[]string) *TreeNode {
+	if (*str)[0] == "nil" {
+		*str = (*str)[1:]
+		return nil
 	}
 
-	val, _ := strconv.Atoi(strs[adjustedIndex])
-	node := &TreeNode{Val: val}
+	valStr := (*str)[0]
+	*str = (*str)[1:]
 
-	recurseDeserialize(strs, index*2, node)
-	recurseDeserialize(strs, (index*2)+1, node)
-
-	if index%2 == 0 {
-		root.Left = node
-	} else {
-		root.Right = node
+	val, _ := strconv.Atoi(valStr)
+	root := &TreeNode{
+		Val:   val,
+		Left:  recurse(str),
+		Right: recurse(str),
 	}
+
+	return root
 }

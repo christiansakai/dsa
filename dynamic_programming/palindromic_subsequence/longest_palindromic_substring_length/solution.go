@@ -1,0 +1,58 @@
+package solution
+
+import "math"
+
+func TopDown(str string) int {
+	if len(str) == 0 {
+		return 0
+	}
+
+	cache := map[int]map[int]int{}
+	byteStr := []byte(str)
+
+	return recurse(byteStr, 0, len(byteStr)-1, cache)
+}
+
+func recurse(str []byte, start, end int, cache map[int]map[int]int) int {
+	if start > end {
+		return 0
+	}
+
+	if start == end {
+		return 1
+	}
+
+	if _, ok := cache[start]; ok {
+		if result, ok := cache[start][end]; ok {
+			return result
+		}
+	}
+
+	var max float64 = 0
+
+	if str[start] == str[end] {
+		expectedPalindromicSubstringLength := end - start - 1
+
+		palindromicSubstringLength := recurse(str, start+1, end-1, cache)
+
+		if expectedPalindromicSubstringLength == palindromicSubstringLength {
+			return 2 + expectedPalindromicSubstringLength
+		}
+	}
+
+	skipFront := recurse(str, start+1, end, cache)
+	max = math.Max(max, float64(skipFront))
+
+	skipBack := recurse(str, start, end-1, cache)
+	max = math.Max(max, float64(skipBack))
+
+	result := int(max)
+
+	if _, ok := cache[start]; !ok {
+		cache[start] = map[int]int{}
+	}
+
+	cache[start][end] = result
+
+	return result
+}
