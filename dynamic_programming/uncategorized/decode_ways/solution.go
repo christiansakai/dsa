@@ -5,41 +5,62 @@ func TopDown(s string) int {
 		return 0
 	}
 
-	if len(s) == 1 {
-		if s == "0" {
-			return 0
-		}
+	cache := map[int]int{}
+	return recurse(s, len(s)-1, cache)
+}
 
+func recurse(s string, index int, cache map[int]int) int {
+	if index == -1 {
 		return 1
 	}
 
-	return recurse(s, 0)
-}
-
-func recurse(s string, index int) int {
-	if index == len(s) {
-		return 1
+	if result, ok := cache[index]; ok {
+		return result
 	}
 
 	total := 0
-	if canGoFurther(s, index) {
-		subProb := recurse(s, index+2)
-		total += subProb
+	str := string([]byte{s[index]})
+	if _, ok := dict[str]; ok {
+		total += recurse(s, index-1, cache)
 	}
 
-	subProb := recurse(s, index+1)
-	total += subProb
+	if index-1 >= 0 {
+		str := string([]byte{s[index-1], s[index]})
+		if _, ok := dict[str]; ok {
+			total += recurse(s, index-2, cache)
+		}
+	}
+
+	cache[index] = total
 
 	return total
 }
 
-func canGoFurther(s string, index int) bool {
-	return (s[index] == '1' || s[index] == '2') &&
-		index+1 < len(s) &&
-		(s[index+1] == '1' ||
-			s[index+1] == '2' ||
-			s[index+1] == '3' ||
-			s[index+1] == '4' ||
-			s[index+1] == '5' ||
-			s[index+1] == '6')
+var dict = map[string]bool{
+	"1":  true,
+	"2":  true,
+	"3":  true,
+	"4":  true,
+	"5":  true,
+	"6":  true,
+	"7":  true,
+	"8":  true,
+	"9":  true,
+	"10": true,
+	"11": true,
+	"12": true,
+	"13": true,
+	"14": true,
+	"15": true,
+	"16": true,
+	"17": true,
+	"18": true,
+	"19": true,
+	"20": true,
+	"21": true,
+	"22": true,
+	"23": true,
+	"24": true,
+	"25": true,
+	"26": true,
 }

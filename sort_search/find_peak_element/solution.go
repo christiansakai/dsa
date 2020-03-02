@@ -13,10 +13,10 @@ func Solve(nums []int) int {
 
 		// If the mid element is on descending slope
 		if nums[mid] > nums[mid+1] {
-			// then the peak must be on the right
+			// then the peak must be on the left
 			right = mid
 		} else { // If the mid element is on the ascending slope
-			// then the peak must be on the left
+			// then the peak must be on the right
 			left = mid + 1
 		}
 	}

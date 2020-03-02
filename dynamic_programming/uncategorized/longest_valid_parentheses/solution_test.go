@@ -4,22 +4,22 @@ import "testing"
 
 func TestSolution(t *testing.T) {
 	tests := []struct {
-		Input  string
-		Output int
+		input  string
+		output int
 	}{
-		{"", 0},
-		{"1", 1},
-		{"12", 2},
-		{"226", 3},
-		{"10", 1},
-		{"12345678", 3},
+		{"(()", 2},
+		{")()())", 4},
+		{")(", 0},
+		{")()(", 2},
+		{"()(()", 2},
 	}
 
 	t.Run("Top-down Dynamic Programming with Memoization", func(t *testing.T) {
 		for _, tt := range tests {
-			got := TopDown(tt.Input)
-			if got != tt.Output {
-				t.Errorf("got %d, want %d", got, tt.Output)
+			got := TopDown(tt.input)
+
+			if got != tt.output {
+				t.Errorf("got %d, want %d", got, tt.output)
 			}
 		}
 	})
