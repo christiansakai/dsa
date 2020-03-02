@@ -5,23 +5,23 @@ import (
 	"testing"
 )
 
-func TestSolution(t *testing.T) {
+func testsolution(t *testing.t) {
 	input := [][]string{
-		[]string{"John", "johnsmith@mail.com", "john00@mail.com"},
-		[]string{"John", "johhnybravo@mail.com"},
-		[]string{"John", "johnsmith@mail.com", "john_newyork@mail.com"},
-		[]string{"Mary", "mary@mail.com"},
+		[]string{"john", "johnsmith@mail.com", "john00@mail.com"},
+		[]string{"john", "johhnybravo@mail.com"},
+		[]string{"john", "johnsmith@mail.com", "john_newyork@mail.com"},
+		[]string{"mary", "mary@mail.com"},
 	}
 
 	output := [][]string{
-		[]string{"John", "john00@mail", "john_newyork@mail", "johnsmith@mail"},
-		[]string{"John", "johhnybravo@mail"},
-		[]string{"Mary", "mary@mail.com"},
+		[]string{"john", "john00@mail", "john_newyork@mail", "johnsmith@mail"},
+		[]string{"john", "johhnybravo@mail"},
+		[]string{"mary", "mary@mail.com"},
 	}
 
-	got := Solve(tt.input)
+	got := solve(tt.input)
 
-	if !reflect.DeepEqual(got, output) {
-		t.Errorf("got %v, want %v", got, output)
+	if !reflect.deepequal(got, output) {
+		t.errorf("got %v, want %v", got, output)
 	}
 }
