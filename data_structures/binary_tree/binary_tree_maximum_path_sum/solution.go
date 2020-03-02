@@ -3,55 +3,51 @@ package solution
 import "math"
 
 func Solve(root *TreeNode) int {
-	if root == nil {
-		return 0
-	}
+  if root == nil {
+    return 0
+  }
 
-	maxPathSum, _ := recurse(root)
-	return int(maxPathSum)
+  maxPathSum, _ := recurse(root)
+  return maxPathSum
 }
 
-func recurse(root *TreeNode) (float64, float64) {
-	if root.Left == nil && root.Right == nil {
-		return float64(root.Val), float64(root.Val)
-	}
+func recurse(root *TreeNode) (int, int) {
+  if root.Left == nil && root.Right == nil {
+    return root.Val, root.Val
+  }
 
-	if root.Left != nil && root.Right != nil {
-		leftMaxPathSum, leftMaxBranchSum := recurse(root.Left)
-		rightMaxPathSum, rightMaxBranchSum := recurse(root.Right)
+  maxPathSum := float64(root.Val)
+  longestBranch := math.Inf(-1)
 
-		currMaxPathSumWithJustLeft := float64(root.Val) + leftMaxBranchSum
-		currMaxPathSumWithJustRight := float64(root.Val) + rightMaxBranchSum
-		currMaxPathSum := float64(root.Val) + leftMaxBranchSum + rightMaxBranchSum
-		maxPathSum := math.Max(float64(root.Val), currMaxPathSumWithJustLeft)
-		maxPathSum = math.Max(float64(root.Val), currMaxPathSumWithJustRight)
-		maxPathSum = math.Max(float64(root.Val), currMaxPathSum)
+  if root.Left != nil {
+    leftMaxPathSum, leftLongestBranch := recurse(root.Left)
 
-		maxPathSum = math.Max(maxPathSum, leftMaxPathSum)
-		maxPathSum = math.Max(maxPathSum, rightMaxPathSum)
+    maxPathSum = math.Max(maxPathSum, float64(leftMaxPathSum))
+    maxPathSum = math.Max(
+      maxPathSum,
+      float64(root.Val + leftLongestBranch),
+    )
 
-		maxBranchSum := math.Max(leftMaxBranchSum, rightMaxBranchSum)
+    longestBranch = math.Max(
+      longestBranch,
+      float64(leftLongestBranch),
+    )
+  }
 
-		return maxPathSum, maxBranchSum + float64(root.Val)
-	}
+  if root.Right != nil {
+    rightMaxPathSum, rightLongestBranch := recurse(root.Right)
 
-	if root.Left != nil {
-		leftMaxPathSum, leftMaxBranchSum := recurse(root.Left)
+    maxPathSum = math.Max(maxPathSum, float64(rightMaxPathSum))
+    maxPathSum = math.Max(
+      maxPathSum,
+      float64(root.Val + rightLongestBranch),
+    )
 
-		currMaxPathSum := float64(root.Val) + leftMaxBranchSum
+    longestBranch = math.Max(
+      longestBranch,
+      float64(rightLongestBranch),
+    )
+  }
 
-		maxPathSum := math.Max(float64(root.Val), currMaxPathSum)
-		maxPathSum = math.Max(maxPathSum, leftMaxPathSum)
-
-		return maxPathSum, leftMaxBranchSum + float64(root.Val)
-	}
-
-	rightMaxPathSum, rightMaxBranchSum := recurse(root.Right)
-
-	currMaxPathSum := float64(root.Val) + rightMaxBranchSum
-
-	maxPathSum := math.Max(float64(root.Val), currMaxPathSum)
-	maxPathSum = math.Max(maxPathSum, rightMaxPathSum)
-
-	return maxPathSum, rightMaxBranchSum + float64(root.Val)
+  return int(maxPathSum), int(longestBranch)
 }

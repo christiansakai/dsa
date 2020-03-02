@@ -499,6 +499,7 @@ List of problems where it seems tricky:
 - `sort_search/find_peak_element/`
 - `sort_search/meeting_rooms_2/`
 - `sort_search/3sum`
+- `sort_search/first_bad_version`
 
 ## TODO List
 - Educative.io

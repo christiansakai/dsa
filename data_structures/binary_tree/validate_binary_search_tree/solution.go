@@ -1,55 +1,44 @@
 package solution
 
+import "math"
+
 func Solve(root *TreeNode) bool {
-	if root == nil || (root.Left == nil && root.Right == nil) {
-		return true
-	}
+  if root == nil {
+    return true
+  }
 
-	if root.Left != nil && root.Right != nil {
-		leftIsValid, _, rightMost := recurse(root.Left)
-		rightIsValid, leftMost, _ := recurse(root.Right)
-
-		return leftIsValid && rightIsValid &&
-			(root.Val > rightMost) && (root.Val < leftMost)
-	}
-
-	if root.Left != nil {
-		leftIsValid, _, rightMost := recurse(root.Left)
-		return leftIsValid
-	}
+  isValid, _, _ := recurse(root)
+  return isValid
 }
 
 func recurse(root *TreeNode) (bool, int, int) {
-	if root.Left == nil && root.Right == nil {
-		return true, root.Val, root.Val
-	}
+  if root.Left == nil && root.Right == nil {
+    return true, root.Val, root.Val
+  }
 
-	if root.Left != nil && root.Right != nil {
-		currIsValid := (root.Left.Val < root.Val) &&
-			(root.Val < root.Right.Val)
+  isValid := true
+  smallest := root.Val
+  biggest := root.Val
 
-		leftIsValid, leftLeftMost, leftRightMost := recurse(root.Left)
-		rightIsValid, rightLeftMost, rightRightMost := recurse(root.Right)
+  if root.Left != nil {
+    isValid = isValid && (root.Left.Val < root.Val)
 
-		isValid := currIsValid && leftIsValid && rightIsValid &&
-			(root.Val > leftRightMost) && (root.Val < rightLeftMost)
+    leftIsValid, leftSmallest, leftBiggest := recurse(root.Left)
+    
+    isValid = isValid && leftIsValid && (leftBiggest < root.Val)
+    smallest = int(math.Min(float64(smallest), float64(leftSmallest)))
+    biggest = int(math.Max(float64(biggest), float64(root.Val)))
+  }
 
-		return isValid, leftLeftMost, rightRightMost
-	}
+  if root.Right != nil {
+    isValid = isValid && (root.Val < root.Right.Val) 
 
-	if root.Left != nil {
-		currIsValid := root.Left.Val < root.Val
-		leftIsValid, leftLeftMost, leftRightMost := recurse(root.Left)
+    rightIsValid, rightSmallest, rightBiggest := recurse(root.Right)
 
-		isValid := currIsValid && leftIsValid && (root.Val > leftRightMost)
+    isValid = isValid && rightIsValid && (root.Val < rightSmallest)
+    smallest = int(math.Min(float64(smallest), float64(root.Val)))
+    biggest = int(math.Max(float64(biggest), float64(rightBiggest)))
+  }
 
-		return isValid, leftLeftMost, root.Val
-	}
-
-	currIsValid := root.Val > root.Right.Val
-	rightIsValid, rightLeftMost, rightRightMost := recurse(root.Right)
-
-	isValid := currIsValid && rightIsValid && (root.Val < rightLeftMost)
-
-	return isValid, root.Val, rightRightMost
+  return isValid, smallest, biggest
 }
