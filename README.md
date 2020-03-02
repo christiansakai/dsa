@@ -488,12 +488,14 @@ List of problems where it seems tricky:
 - `data_structures/array_string/next_permutation`
 - `data_structures/array_string/integer_to_english_words`
 - `data_structures/linked_list/reorder_list`
+- `data_structures/linked_list/copy_list_with_random_pointers`
 - `data_structures/binary_tree/diameter_of_binary_tree`
 - `data_structures/binary_tree/binary_tree_maximum_path_sum`
 - `data_structures/binary_tree/lowest_common_ancestor`
 - `data_structures/binary_tree/binary_tree_vertical_order_traversal`
 - `data_structures/binary_tree/serialize_deserialize_binary_tree`
 - `data_structures/graph/find_the_celebrity`
+- `data_structures/graph/clone_graph`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
 - `dynamic_programming/palindromic_subsequence/longest_palindromic_substring`
 - `recursion/same_with_iteration/square_of_number`
