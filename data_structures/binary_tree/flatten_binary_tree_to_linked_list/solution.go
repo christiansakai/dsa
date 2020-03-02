@@ -9,23 +9,32 @@ func Solve(root *TreeNode) {
 }
 
 func recurse(root *TreeNode) *TreeNode {
-	if root == nil {
-		return nil
+	if root.Left == nil && root.Right == nil {
+		return root
 	}
 
-	left := recurse(root.Left)
-	right := recurse(root.Right)
+	if root.Left != nil && root.Right != nil {
+		subProbLeft := recurse(root.Left)
+		subProbRight := recurse(root.Right)
 
-	root.Left = nil
-	root.Right = left
+		root.Left = nil
+		root.Right = subProbLeft
 
-	tempLeft := left
-	for tempLeft.Right != nil {
-		tempLeft = tempLeft.Right
+		// traverse subProbLeft to the end
+		for subProbLeft != nil && subProbLeft.Right != nil {
+			subProbLeft = subProbLeft.Right
+		}
+
+		subProbLeft.Right = subProbRight
+	} else if root.Left != nil {
+		subProbLeft := recurse(root.Left)
+		root.Left = nil
+		root.Right = subProbLeft
+	} else if root.Right != nil {
+		subProbRight := recurse(root.Right)
+		root.Left = nil
+		root.Right = subProbRight
 	}
-
-	tempLeft.Left = nil
-	tempLeft.Right = right
 
 	return root
 }

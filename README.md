@@ -412,6 +412,129 @@ func recurse(root *TreeNode, level int, result *[][]int) {
 }
 ```
 
+### Graph Cloning
+##### Recursive
+
+```go
+func cloneGraph(node *GraphNode) *GraphNode {
+	if node == nil {
+		return nil
+	}
+
+	visited := map[*GraphNode]*GraphNode{}
+	return recurse(node, visited)
+}
+
+func recurse(node *GraphNode, visited map[*GraphNode]*GraphNode) *GraphNode {
+	if node == nil {
+		return nil
+	}
+
+	if cloned, ok := visited[node]; ok {
+		return cloned
+	}
+
+	cloned := &GraphNode{Val: node.Val}
+	visited[node] = cloned
+
+	for _, neighbor := range node.Neighbors {
+		clonedNeighbor := recurse(neighbor, visited)
+		cloned.Neighbors = append(cloned.Neighbors, clonedNeighbor)
+	}
+
+	return cloned
+}
+```
+
+### Graph Coloring
+##### Recursive
+
+```go
+func coloring(graph [][]int) bool {
+  colors := make([]int, len(graph))
+  for i := 0; i < len(colors); i++ {
+    colors[i] = -1
+  }
+
+  for i := 0; i < len(colors); i++ {
+    if colors[i] == -1 && !colorGraph(i, 0, &colors, graph) {
+      return false
+    }
+  }
+
+  return true
+}
+
+func colorGraph(node, color int, colors *[]int, graph [][]int) bool {
+  if (*colors)[node] != -1 {
+    if (*colors)[node] == color {
+      return true
+    }
+
+    return false
+  }
+
+  (*colors)[node] = color
+
+  neighbors := graph[node]
+  for _, n := range neighbors {
+    if color == 0 {
+      if !colorGraph(n, 1, colors, graph) {
+        return false
+      }
+    } else {
+      if !colorGraph(n, 0, colors, graph) {
+        return false
+      }
+    }
+  }
+  
+  return true
+}
+```
+
+#### Iterative
+
+```go
+func coloring(graph [][]int) bool {
+  colors := make([]int, len(graph))
+  for i := 0; i < len(colors); i++ {
+    colors[i] = -1 
+  }
+
+  for i := 0; i < len(colors); i++ {
+    if colors[i] == -1 {
+      stack := []int{i}
+      colors[i] = 0
+
+      for len(stack) > 0 {
+        node := stack[len(stack) - 1]
+        stack = stack[:len(stack) - 1]
+
+        neighbors := graph[node]
+        for _, neighbor := range neighbors {
+          if colors[neighbor] == -1 {
+            stack = append(stack, neighbor)
+
+            if colors[node] == 0 {
+              colors[neighbor] = 1
+            } else {
+              colors[neighbor] = 0
+            }
+          } else {
+            if colors[neighbor] == colors[node] {
+              return false
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return true
+}
+```
+
 ### Permutation
 
 ```go
