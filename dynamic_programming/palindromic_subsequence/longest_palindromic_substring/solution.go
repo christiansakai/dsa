@@ -1,25 +1,30 @@
 package solution
 
-import "math"
-
-func TopDown(str string) int {
+func TopDown(str string) string {
 	if len(str) == 0 {
-		return 0
+		return ""
 	}
 
-	cache := map[int]map[int]int{}
+	cache := map[int]map[int]strRange{}
 	byteStr := []byte(str)
 
-	return recurse(byteStr, 0, len(byteStr)-1, cache)
+	palindromeRange := recurse(byteStr, 0, len(byteStr)-1, cache)
+
+	return getString(byteStr, palindromeRange.from, palindromeRange.to)
 }
 
-func recurse(str []byte, start, end int, cache map[int]map[int]int) int {
+type strRange struct {
+	from int
+	to   int
+}
+
+func recurse(str []byte, start, end int, cache map[int]map[int]strRange) strRange {
 	if start > end {
-		return 0
+		return strRange{start, end}
 	}
 
 	if start == end {
-		return 1
+		return strRange{start, end}
 	}
 
 	if _, ok := cache[start]; ok {
@@ -28,34 +33,45 @@ func recurse(str []byte, start, end int, cache map[int]map[int]int) int {
 		}
 	}
 
-	var max float64 = 0
-
 	if str[start] == str[end] {
 		expectedPalindromicSubstringLength := end - start - 1
 
-		palindromicSubstringLength := recurse(str, start+1, end-1, cache)
+		palindromicSubstringRange := recurse(str, start+1, end-1, cache)
+		palindromicSubstringLength := palindromicSubstringRange.to - palindromicSubstringRange.from + 1
 
 		if expectedPalindromicSubstringLength == palindromicSubstringLength {
-			max = math.Max(
-				max,
-				float64(expectedPalindromicSubstringLength+2),
-			)
+			return strRange{start, end}
 		}
 	}
 
-	skipFront := recurse(str, start+1, end, cache)
-	max = math.Max(max, float64(skipFront))
+	skipFrontRange := recurse(str, start+1, end, cache)
+	skipFrontRangeLength := skipFrontRange.to - skipFrontRange.from + 1
 
-	skipBack := recurse(str, start, end-1, cache)
-	max = math.Max(max, float64(skipBack))
+	skipBackRange := recurse(str, start, end-1, cache)
+	skipBackRangeLength := skipBackRange.to - skipBackRange.from + 1
 
-	result := int(max)
+	var result strRange
+
+	if skipFrontRangeLength > skipBackRangeLength {
+		result = skipFrontRange
+	} else {
+		result = skipBackRange
+	}
 
 	if _, ok := cache[start]; !ok {
-		cache[start] = map[int]int{}
+		cache[start] = map[int]strRange{}
 	}
 
 	cache[start][end] = result
 
 	return result
+}
+
+func getString(byteStr []byte, from, to int) string {
+	result := []byte{}
+	for i := from; i <= to; i++ {
+		result = append(result, byteStr[i])
+	}
+
+	return string(result)
 }

@@ -6,7 +6,7 @@ import (
 )
 
 func TestSolution(t *testing.T) {
-	// var t1 *TreeNode = nil
+	var t1 *TreeNode = nil
 
 	t2 := &TreeNode{
 		Val: 1,
@@ -30,42 +30,42 @@ func TestSolution(t *testing.T) {
 		},
 	}
 
-	// t3 := &TreeNode{
-	//   Val: 5,
-	//   Left: &TreeNode{
-	//     Val: 2,
-	//     Left: nil,
-	//     Right: nil,
-	//   },
-	//   Right: &TreeNode{
-	//     Val: 3,
-	//     Left: &TreeNode{
-	//       Val: 2,
-	//       Left: &TreeNode{
-	//         Val: 3,
-	//         Left: nil,
-	//         Right: nil,
-	//       },
-	//       Right: &TreeNode{
-	//         Val: 1,
-	//         Left: nil,
-	//         Right: nil,
-	//       },
-	//     },
-	//     Right: &TreeNode{
-	//       Val: 4,
-	//       Left: nil,
-	//       Right: nil,
-	//     },
-	//   },
-	// }
+	t3 := &TreeNode{
+		Val: 5,
+		Left: &TreeNode{
+			Val:   2,
+			Left:  nil,
+			Right: nil,
+		},
+		Right: &TreeNode{
+			Val: 3,
+			Left: &TreeNode{
+				Val: 2,
+				Left: &TreeNode{
+					Val:   3,
+					Left:  nil,
+					Right: nil,
+				},
+				Right: &TreeNode{
+					Val:   1,
+					Left:  nil,
+					Right: nil,
+				},
+			},
+			Right: &TreeNode{
+				Val:   4,
+				Left:  nil,
+				Right: nil,
+			},
+		},
+	}
 
 	tests := []struct {
 		Data *TreeNode
 	}{
-		// {t1},
+		{t1},
 		{t2},
-		// {t3},
+		{t3},
 	}
 
 	for _, tt := range tests {

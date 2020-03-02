@@ -17,6 +17,21 @@ Repository for my practice of Data Structures and Algorithms
 
 ### Sliding Window
 
+```go
+func findSomeWindow(nums []int) {
+  i := 0
+  for j := 0; j < len(nums); j++ {
+    // some logic
+
+    for condition() {
+      i += 1
+    }
+
+    // logic to check max or min
+  }
+}
+```
+
 ### Two Pointer
 
 ### Binary Search
@@ -482,6 +497,7 @@ List of problems where it seems tricky:
 - `data_structures/graph/find_the_celebrity`
 - `data_structures/graph/clone_graph`
 - `dynamic_programming/longest_common_substring/minimum_deletion_insertion_to_transform`
+- `dynamic_programming/palindromic_subsequence/longest_palindromic_substring`
 - `recursion/same_with_iteration/square_of_number`
 - `recursion/with_numbers/gcd`
 - `recursion/with_numbers/convert_to_binary`
