@@ -15,6 +15,101 @@ Repository for my practice of Data Structures and Algorithms
 - 'A' is 65
 - 'a' is 97
 
+### Merge Sort
+
+```go
+func sortArray(nums []int) []int {
+  if len(nums) <= 1 {
+    return nums
+  }
+
+  left, right := divide(nums)
+
+  sortedLeft := sortArray(left)
+  sortedRight := sortArray(right)
+
+  return merge(sortedLeft, sortedRight)
+}
+
+func divide(nums []int) ([]int, []int) {
+  pivot := (len(nums) / 2) - 1
+  left := nums[:pivot + 1]
+  right := nums[pivot + 1:]
+
+  return left, right
+}
+
+func merge(left []int, right []int) []int {
+  result := make([]int, len(left) + len(right))
+  i := 0
+  
+  l := 0
+  r := 0
+
+  for l < len(left) || r < len(right) {
+    if l < len(left) && r < len(right) {
+      if left[l] < right[r] {
+        result[i] = left[l]
+        l++
+      } else {
+        result[i] = right[r]
+        r++
+      }
+    } else if l < len(left) {
+      result[i] = left[l]
+      l++
+    } else {
+      result[i] = right[r]
+      r++
+    }
+
+    i++
+  }
+
+  return result
+}
+```
+
+### Quick Sort
+
+```go
+func sort(nums []int) []int {
+  qSort(nums, 0, len(nums) - 1)
+  return nums
+}
+
+func qSort(nums []int, left, right int) {
+  if left < right {
+    p := partition(nums, left, right)
+    qSort(nums, left, p - 1)
+    qSort(nums, p + 1, right)
+  }
+}
+
+func partition(nums []int, left, right int) int {
+  // picks last element as pivot
+  // returns the index of pivot value in the sorted array
+  pivot := nums[right]
+  i := left
+
+  for j := left; j < right; j++ {
+    if nums[j] < pivot {
+      temp := nums[i]
+      nums[i] = nums[j]
+      i++
+
+      nums[j] = temp
+    }
+  }
+
+  temp := nums[i]
+  nums[i] = nums[right]
+  nums[right] = temp
+
+  return i
+}
+```
+
 ### Sliding Window
 
 ```go
